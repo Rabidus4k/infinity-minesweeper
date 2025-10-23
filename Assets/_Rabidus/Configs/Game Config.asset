@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7736263f84f573e4cb431b159bc2a1d3, type: 3}
+  m_Name: Game Config
+  m_EditorClassIdentifier: Assembly-CSharp::GameConfig
+  <StartCells>k__BackingField:
+    serializedKvps:
+    - Key: {x: -1, y: 1, z: 0}
+      Value:
+        Value: 0
+        IsOpened: 0
+      index: 0
+      isKeyRepeated: 0
+    - Key: {x: -1, y: 0, z: 0}
+      Value:
+        Value: 0
+        IsOpened: 0
+      index: 1
+      isKeyRepeated: 0
+    - Key: {x: -1, y: -1, z: 0}
+      Value:
+        Value: 0
+        IsOpened: 0
+      index: 2
+      isKeyRepeated: 0
+    - Key: {x: 0, y: 1, z: 0}
+      Value:
+        Value: 0
+        IsOpened: 0
+      index: 3
+      isKeyRepeated: 0
+    - Key: {x: 0, y: 0, z: 0}
+      Value:
+        Value: 0
+        IsOpened: 0
+      index: 4
+      isKeyRepeated: 0
+    - Key: {x: 0, y: -1, z: 0}
+      Value:
+        Value: 0
+        IsOpened: 0
+      index: 5
+      isKeyRepeated: 0
+    - Key: {x: 1, y: 1, z: 0}
+      Value:
+        Value: 0
+        IsOpened: 0
+      index: 6
+      isKeyRepeated: 0
+    - Key: {x: 1, y: 0, z: 0}
+      Value:
+        Value: 0
+        IsOpened: 0
+      index: 7
+      isKeyRepeated: 0
+    - Key: {x: 1, y: -1, z: 0}
+      Value:
+        Value: 0
+        IsOpened: 0
+      index: 8
+      isKeyRepeated: 0
+    dividerPos: 0.33
+  <Size>k__BackingField: 8
+  <MinesPerChunk>k__BackingField: 20

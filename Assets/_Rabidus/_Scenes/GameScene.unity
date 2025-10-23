@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 941619246}
   - component: {fileID: 941619247}
   m_Layer: 0
-  m_Name: GridManager
+  m_Name: GameGridDrawerView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -550,66 +550,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f810ac02e1b844289ebddab8a80f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mana
-  GridView: {fileID: 1549165112}
-  Cells:
+  _cell: {fileID: 1854250782372594293, guid: 8b19f88a1e3029c4d8a461c7e81f11b2, type: 3}
+  _sprites:
     serializedKvps:
-    - Key: {x: -1, y: 1, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
+    - Key: -1
+      Value: {fileID: 21300000, guid: db88cb1090eecbc4782db0a4acd5f685, type: 3}
       index: 0
       isKeyRepeated: 0
-    - Key: {x: -1, y: 0, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
+    - Key: 0
+      Value: {fileID: 21300000, guid: 711fca6f192867a4e886ceec943fb409, type: 3}
       index: 1
       isKeyRepeated: 0
-    - Key: {x: -1, y: -1, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
+    - Key: 1
+      Value: {fileID: 21300000, guid: 493f856e0447958469b85975c6fba758, type: 3}
       index: 2
       isKeyRepeated: 0
-    - Key: {x: 0, y: 1, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
+    - Key: 2
+      Value: {fileID: 21300000, guid: a8a841a729985ea4f9398f63c0fdc563, type: 3}
       index: 3
       isKeyRepeated: 0
-    - Key: {x: 0, y: 0, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
+    - Key: 3
+      Value: {fileID: 21300000, guid: c455a18d3ca50d744a06d8a0e5773a54, type: 3}
       index: 4
       isKeyRepeated: 0
-    - Key: {x: 0, y: -1, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
+    - Key: 4
+      Value: {fileID: 21300000, guid: bec3765f6dd5ee54abe0bdcbd9f024f8, type: 3}
       index: 5
       isKeyRepeated: 0
-    - Key: {x: 1, y: 1, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
+    - Key: 5
+      Value: {fileID: 21300000, guid: 32d0c3ca7c0cdad40858e497db8d597b, type: 3}
       index: 6
       isKeyRepeated: 0
-    - Key: {x: 1, y: 0, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
+    - Key: 6
+      Value: {fileID: 21300000, guid: 9fc44b427cd75f344a30a6f637a2b00d, type: 3}
       index: 7
       isKeyRepeated: 0
-    - Key: {x: 1, y: -1, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
+    - Key: 7
+      Value: {fileID: 21300000, guid: 7360ea43ca197ff4ba97df6eb016d6ad, type: 3}
       index: 8
       isKeyRepeated: 0
+    - Key: 8
+      Value: {fileID: 21300000, guid: a3f7290006b79ce41b0f13a91431e63c, type: 3}
+      index: 9
+      isKeyRepeated: 0
     dividerPos: 0.33
-  ChunkSize: 8
-  MinesPerChunk: 20
 --- !u!1 &1075005324
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,94 +853,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1549165109
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1549165111}
-  - component: {fileID: 1549165112}
-  m_Layer: 0
-  m_Name: GridView
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1549165111
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1549165109}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1549165112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1549165109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34f6c9d28fc76bd4e8df7ebe4507ea59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GridView
-  _cell: {fileID: 1854250782372594293, guid: 8b19f88a1e3029c4d8a461c7e81f11b2, type: 3}
-  _sprites:
-    serializedKvps:
-    - Key: -1
-      Value: {fileID: 21300000, guid: db88cb1090eecbc4782db0a4acd5f685, type: 3}
-      index: 0
-      isKeyRepeated: 0
-    - Key: 0
-      Value: {fileID: 21300000, guid: 711fca6f192867a4e886ceec943fb409, type: 3}
-      index: 1
-      isKeyRepeated: 0
-    - Key: 1
-      Value: {fileID: 21300000, guid: 493f856e0447958469b85975c6fba758, type: 3}
-      index: 2
-      isKeyRepeated: 0
-    - Key: 2
-      Value: {fileID: 21300000, guid: a8a841a729985ea4f9398f63c0fdc563, type: 3}
-      index: 3
-      isKeyRepeated: 0
-    - Key: 3
-      Value: {fileID: 21300000, guid: c455a18d3ca50d744a06d8a0e5773a54, type: 3}
-      index: 4
-      isKeyRepeated: 0
-    - Key: 4
-      Value: {fileID: 21300000, guid: bec3765f6dd5ee54abe0bdcbd9f024f8, type: 3}
-      index: 5
-      isKeyRepeated: 0
-    - Key: 5
-      Value: {fileID: 21300000, guid: 32d0c3ca7c0cdad40858e497db8d597b, type: 3}
-      index: 6
-      isKeyRepeated: 0
-    - Key: 6
-      Value: {fileID: 21300000, guid: 9fc44b427cd75f344a30a6f637a2b00d, type: 3}
-      index: 7
-      isKeyRepeated: 0
-    - Key: 7
-      Value: {fileID: 21300000, guid: 7360ea43ca197ff4ba97df6eb016d6ad, type: 3}
-      index: 8
-      isKeyRepeated: 0
-    - Key: 8
-      Value: {fileID: 21300000, guid: a3f7290006b79ce41b0f13a91431e63c, type: 3}
-      index: 9
-      isKeyRepeated: 0
-    dividerPos: 0.33
 --- !u!1 &1663227180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,6 +973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneInstaller
   _zoomConfig: {fileID: 11400000, guid: 2f88dcb5243037440b097017d03c7ff7, type: 2}
+  _gameConfig: {fileID: 11400000, guid: ed7c55e4b71d3a347b031c0d12505292, type: 2}
 --- !u!1 &1876712910
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,11 +1269,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 2109152665}
-  - {fileID: 941619246}
-  - {fileID: 1549165111}
   - {fileID: 1876712912}
   - {fileID: 1270428139}
-  - {fileID: 1146249299}
-  - {fileID: 1215493148}
   - {fileID: 569120437}
   - {fileID: 1075005325}
+  - {fileID: 941619246}
+  - {fileID: 1215493148}
+  - {fileID: 1146249299}
