@@ -24,12 +24,9 @@ public class GameGridDrawerView : MonoBehaviour
 
         foreach (var item in _gameViewModel.Config.Value.StartCells)
         {
-            _cells.Add(item.Key, item.Value);
+            _cells.Add(item.Key, new CellInfo(0));
         }
-    }
 
-    private void Awake()
-    {
         Random.InitState(123);
 
         DrawChunk(Vector3Int.zero, _cells);
