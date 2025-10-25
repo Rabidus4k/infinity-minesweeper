@@ -5,6 +5,7 @@ public class SceneInstaller : MonoInstaller
 {
     [SerializeField] private ZoomConfig _zoomConfig;
     [SerializeField] private GameConfig _gameConfig;
+    [SerializeField] private GridView _gridView;
 
     public override void InstallBindings()
     {
@@ -16,5 +17,10 @@ public class SceneInstaller : MonoInstaller
 
         Container.Bind<IGameModel>().To<GameModel>().AsSingle();
         Container.Bind<IGameViewModel>().To<GameViewModel>().AsSingle();
+
+        Container.Bind<IScoreModel>().To<ScoreModel>().AsSingle();
+        Container.Bind<IScoreViewModel>().To<ScoreViewModel>().AsSingle();
+
+        Container.BindFactory<GridView, GridView.Factory>().FromComponentInNewPrefab(_gridView).UnderTransformGroup("Grids"); ;
     }
 }
