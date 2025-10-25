@@ -14,15 +14,16 @@ public class GameGridDrawerView : MonoBehaviour
 
     protected IInputViewModel _inputViewModel;
     protected IGameViewModel _gameViewModel;
+    private IScoreViewModel _scoreViewModel;
 
     [Inject]
-    private void Construct(IInputViewModel inputViewModel, IGameViewModel gameViewModel)
+    private void Construct(IInputViewModel inputViewModel, IGameViewModel gameViewModel, IScoreViewModel scoreViewModel)
     {
         _inputViewModel = inputViewModel;
         _inputViewModel.LMBCoords.OnChanged += HandleClick;
         _inputViewModel.RMBCoords.OnChanged += HandleRightClick;
         _gameViewModel = gameViewModel;
-
+        _scoreViewModel = scoreViewModel;
         foreach (var item in _gameViewModel.Config.Value.StartCells)
         {
             _cells.Add(item.Key, new CellInfo(0));
@@ -156,6 +157,7 @@ public class GameGridDrawerView : MonoBehaviour
             cellInstance.Initialize(_sprites[_cells[coords].Value]);
         }
 
+        _scoreViewModel.AddScore(1);
         _gameViewModel.SelectCell(new Cell(coords, _cells[coords]));
     }
 
