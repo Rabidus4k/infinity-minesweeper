@@ -9,6 +9,8 @@ public class InputModel : IInputModel
     public Vector2 LastMousePos { get; private set; }
     public Vector3Int LeftMouseButtonClick { get; private set; }
     public Vector3Int RightMouseButtonClick { get; private set; }
+    public Vector3Int Coords { get; private set; }
+    public Vector3 CameraCoords { get; private set; }
 
     public InputModel(IZoomConfig zoomConfig)
     {
@@ -54,6 +56,16 @@ public class InputModel : IInputModel
     {
         RightMouseButtonClick = coords;
     }
+
+    public void HandleCoords(Vector3Int coords)
+    {
+        Coords = coords;
+    }
+
+    public void HandleCameraCoords(Vector3 coords)
+    {
+        CameraCoords = coords;
+    }
 }
 
 public interface IInputModel 
@@ -65,6 +77,8 @@ public interface IInputModel
     public Vector2 LastMousePos { get; }
     public Vector3Int LeftMouseButtonClick { get; }
     public Vector3Int RightMouseButtonClick { get; }
+    public Vector3Int Coords { get; }
+    public Vector3 CameraCoords { get; }
 
     void HandleZoom(float zoomInput);
     void HandleSliderZoom(float value);
@@ -73,4 +87,6 @@ public interface IInputModel
     void EndDrag();
     void HandleLeftMouseButtonClick(Vector3Int coords);
     void HandleRightMouseButtonClick(Vector3Int coords);
+    void HandleCoords(Vector3Int coords);
+    void HandleCameraCoords(Vector3 coords);
 }

@@ -24,7 +24,13 @@ public class InputReaderView : MonoBehaviour
         HandleZoom();
         HandleDrag();
         HandleClick();
-        
+        HandleCoords();
+    }
+
+    private void HandleCoords()
+    {
+        if (TryMouseToCell(out Vector3Int coords))
+            _viewModel.HandleCoords(coords);
     }
 
     private void HandleClick()

@@ -7,6 +7,8 @@ public class InputViewModel : IInputViewModel
     public ReactiveProperty<Vector2> DragDelta { get; private set; } = new ReactiveProperty<Vector2>();
     public ReactiveProperty<Vector3Int> LMBCoords { get; private set; } = new ReactiveProperty<Vector3Int>();
     public ReactiveProperty<Vector3Int> RMBCoords { get; private set; } = new ReactiveProperty<Vector3Int>();
+    public ReactiveProperty<Vector3Int> Coords { get; private set; } = new ReactiveProperty<Vector3Int>();
+    public ReactiveProperty<Vector3> CameraCoords { get; private set; } = new ReactiveProperty<Vector3>();
 
     protected IInputModel _model;
 
@@ -61,6 +63,20 @@ public class InputViewModel : IInputViewModel
         _model.HandleRightMouseButtonClick(coords);
         RMBCoords.Value = _model.RightMouseButtonClick;
     }
+
+    public void HandleCoords(Vector3Int coords)
+    {
+        if (Coords.Value == coords) return;
+
+        _model.HandleCoords(coords);
+        Coords.Value = _model.Coords;
+    }
+
+    public void HandleCameraCoords(Vector3 coords)
+    {
+        _model.HandleCameraCoords(coords);
+        CameraCoords.Value = _model.CameraCoords;
+    }
 }
 
 public interface IInputViewModel
@@ -70,6 +86,9 @@ public interface IInputViewModel
     public ReactiveProperty<Vector2> DragDelta { get; }
     public ReactiveProperty<Vector3Int> LMBCoords { get; }
     public ReactiveProperty<Vector3Int> RMBCoords { get; }
+    public ReactiveProperty<Vector3Int> Coords { get; }
+    public ReactiveProperty<Vector3> CameraCoords { get; }
+    
     void HandleZoom(float zoom);
     void HandleSliderZoom(float value);
     void BeginDrag(Vector2 mousePosition);
@@ -77,4 +96,6 @@ public interface IInputViewModel
     void EndDrag();
     void HandleLeftMouseButtonClickCoords(Vector3Int coords);
     void HandleRightMouseButtonClickCoords(Vector3Int coords);
+    void HandleCoords(Vector3Int coords);
+    void HandleCameraCoords(Vector3 coords);
 }

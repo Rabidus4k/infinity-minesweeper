@@ -20,7 +20,7 @@ public class GameGridDrawerView : MonoBehaviour
     private void Construct(IInputViewModel inputViewModel, IGameViewModel gameViewModel, IScoreViewModel scoreViewModel)
     {
         _inputViewModel = inputViewModel;
-        _inputViewModel.LMBCoords.OnChanged += HandleClick;
+        _inputViewModel.LMBCoords.OnChanged += HandleMouseClick;
         _inputViewModel.RMBCoords.OnChanged += HandleRightClick;
         _gameViewModel = gameViewModel;
         _scoreViewModel = scoreViewModel;
@@ -40,7 +40,7 @@ public class GameGridDrawerView : MonoBehaviour
 
     protected void OnDisable()
     {
-        _inputViewModel.LMBCoords.OnChanged -= HandleClick; 
+        _inputViewModel.LMBCoords.OnChanged -= HandleMouseClick; 
         _inputViewModel.RMBCoords.OnChanged -= HandleRightClick;
     }
 
@@ -70,8 +70,14 @@ public class GameGridDrawerView : MonoBehaviour
         }
     }
 
+    private void HandleMouseClick(Vector3Int coords)
+    {
+        if (CheckNeighbours(coords))
+            HandleClick(coords);
+    }
     private void HandleClick(Vector3Int coords)
     {
+
         HandleClick(coords, new List<Vector3Int>()).Forget();
     }
 
@@ -180,6 +186,24 @@ public class GameGridDrawerView : MonoBehaviour
         }
 
         return counter >= needCount;
+    }
+
+    private bool CheckNeighbours(Vector3Int coords)
+    {
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0) continue;
+
+                var checkCoords = new Vector3Int(coords.x + x, coords.y + y);
+
+                if (_cells.ContainsKey(checkCoords) && _cells[checkCoords].IsOpened)
+                    return true;
+            }
+        }
+
+        return false;
     }
 
     private void OpenTileAround(Vector3Int coords, List<Vector3Int> clickBuffer)

@@ -6,6 +6,7 @@ public class SceneInstaller : MonoInstaller
     [SerializeField] private ZoomConfig _zoomConfig;
     [SerializeField] private GameConfig _gameConfig;
     [SerializeField] private GridView _gridView;
+    [SerializeField] private UICoordsButton _uiCoordsButton;
 
     public override void InstallBindings()
     {
@@ -22,5 +23,6 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<IScoreViewModel>().To<ScoreViewModel>().AsSingle();
 
         Container.BindFactory<GridView, GridView.Factory>().FromComponentInNewPrefab(_gridView).UnderTransformGroup("Grids"); ;
+        //Container.BindFactory<UICoordsButton, UICoordsButton.Factory>().FromComponentInNewPrefab(_uiCoordsButton).UnderTransformGroup("Grids"); ;
     }
 }
