@@ -41,63 +41,46 @@ public class GameGridManagerView : MonoBehaviour
                 0
             );
 
+        //Initialize grid view
+        if (!_grid.ContainsKey(origin))
+        {
+            _grid.Add(origin, new List<Cell>());
+
+            var gridView = _gridFactory.Create();
+            gridView.transform.position = origin;
+            gridView.Initialize(0, _gameViewModel.Config.Value.Size * _gameViewModel.Config.Value.Size);
+
+            _gridViews.Add(origin, gridView);
+        }
+
         if (cell.Info.IsOpened)
         {
-            if (_grid.ContainsKey(origin))
+            if (_grid[origin].Contains(cell)) return;
+
+            if (cell.Info.Value == -1)
+            {
+                _gridViews[origin].SetState(GridStates.Death);
+            }
+
+            _grid[origin].Add(cell);
+            _gridViews[origin].AddValue(1);
+        }
+        else 
+        {
+            if (cell.Info.IsFlagged && cell.Info.Value == -1)
             {
                 if (_grid[origin].Contains(cell)) return;
                 _grid[origin].Add(cell);
 
                 _gridViews[origin].AddValue(1);
             }
-            else
-            {
-                _grid.Add(origin, new List<Cell>() { cell });
-
-                //Instantiate(_gridView, origin, Quaternion.identity);
-
-                var gridView = _gridFactory.Create();
-                gridView.transform.position = origin;
-
-                gridView.Initialize(1, _gameViewModel.Config.Value.Size * _gameViewModel.Config.Value.Size);
-                _gridViews.Add(origin, gridView);
-            }
-        }
-        else 
-        {
-            if (cell.Info.IsFlagged && cell.Info.Value == -1)
-            {
-                if (_grid.ContainsKey(origin))
-                {
-                    if (_grid[origin].Contains(cell)) return;
-                    _grid[origin].Add(cell);
-
-                    _gridViews[origin].AddValue(1);
-                }
-                else
-                {
-                    _grid.Add(origin, new List<Cell>() { cell });
-
-                    //var gridView = Instantiate(_gridView, origin, Quaternion.identity);
-
-                    var gridView = _gridFactory.Create();
-                    gridView.transform.position = origin;
-
-                    gridView.Initialize(1, _gameViewModel.Config.Value.Size * _gameViewModel.Config.Value.Size);
-                    _gridViews.Add(origin, gridView);
-                }
-            }
             else if (!cell.Info.IsFlagged)
             {
-                if (_grid.ContainsKey(origin))
-                {
-                    if (_grid[origin].Contains(cell))
-                    {
-                        _grid[origin].Remove(cell);
+                if (!_grid[origin].Contains(cell)) return;
 
-                        _gridViews[origin].AddValue(-1);
-                    }
-                }
+                _grid[origin].Remove(cell);
+
+                _gridViews[origin].AddValue(-1);
             }
         }
     }

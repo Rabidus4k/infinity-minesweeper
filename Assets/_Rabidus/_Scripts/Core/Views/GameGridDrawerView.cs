@@ -8,6 +8,7 @@ public class GameGridDrawerView : MonoBehaviour
 {
     [SerializeField] private CellView _cell;
     [SerializeField] private SerializedDictionary<int, Sprite> _sprites = new SerializedDictionary<int, Sprite>();
+    [SerializeField] private UINotificationInfo _notificationInfo;
 
     private Dictionary<Vector3Int, CellView> _spawnedCell = new Dictionary<Vector3Int, CellView>();
     private Dictionary<Vector3Int, CellInfo> _cells = new Dictionary<Vector3Int, CellInfo>();
@@ -15,10 +16,13 @@ public class GameGridDrawerView : MonoBehaviour
     protected IInputViewModel _inputViewModel;
     protected IGameViewModel _gameViewModel;
     private IScoreViewModel _scoreViewModel;
+    private UINotificationManager _notificationManager;
 
     [Inject]
-    private void Construct(IInputViewModel inputViewModel, IGameViewModel gameViewModel, IScoreViewModel scoreViewModel)
+    private void Construct(IInputViewModel inputViewModel, IGameViewModel gameViewModel, IScoreViewModel scoreViewModel, UINotificationManager uINotificationManager)
     {
+        _notificationManager = uINotificationManager;
+
         _inputViewModel = inputViewModel;
         _inputViewModel.LMBCoords.OnChanged += HandleMouseClick;
         _inputViewModel.RMBCoords.OnChanged += HandleRightClick;
@@ -40,7 +44,7 @@ public class GameGridDrawerView : MonoBehaviour
 
     protected void OnDisable()
     {
-        _inputViewModel.LMBCoords.OnChanged -= HandleMouseClick; 
+        _inputViewModel.LMBCoords.OnChanged -= HandleMouseClick;
         _inputViewModel.RMBCoords.OnChanged -= HandleRightClick;
     }
 
@@ -74,14 +78,16 @@ public class GameGridDrawerView : MonoBehaviour
     {
         if (CheckNeighbours(coords))
             HandleClick(coords);
+        else
+            _notificationManager.SendNotification(_notificationInfo);
     }
+
     private void HandleClick(Vector3Int coords)
     {
-
         HandleClick(coords, new List<Vector3Int>()).Forget();
     }
 
-    private async UniTask HandleClick(Vector3Int coords, List<Vector3Int> clickBuffer)
+    private async UniTask HandleClick(Vector3Int coords, List<Vector3Int> clickBuffer, bool recurce = true)
     {
         if (clickBuffer != null)
         {
@@ -97,12 +103,15 @@ public class GameGridDrawerView : MonoBehaviour
             if (_cells[coords].IsOpened && _cells[coords].Value != 0 && CheckFlagsAround(coords))
             {
                 await UniTask.WaitForSeconds(0.01f);
-                OpenTileAround(coords, clickBuffer);
+                
+                if (recurce)
+                    OpenTileAround(coords, clickBuffer, false);
             }
             else if (_cells[coords].Value == 0 && _cells[coords].IsOpened == false)
             {
                 OpenTile(coords);
                 await UniTask.WaitForSeconds(0.01f);
+
                 OpenTileAround(coords, clickBuffer);
             }
             else
@@ -115,7 +124,7 @@ public class GameGridDrawerView : MonoBehaviour
             Vector3Int origin = GetGridOrigin(coords);
 
             var chunk = ChunkCreatorHelper.GenerateChunk(_cells, origin, _gameViewModel.Config.Value);
-            
+
             foreach (var cell in chunk)
             {
                 if (_cells.ContainsKey(cell.Key)) continue;
@@ -155,6 +164,7 @@ public class GameGridDrawerView : MonoBehaviour
 
     private void OpenTile(Vector3Int coords)
     {
+        if (_cells[coords].IsOpened) return;
         _cells[coords].IsOpened = true;
 
         if (_spawnedCell.ContainsKey(coords))
@@ -180,8 +190,11 @@ public class GameGridDrawerView : MonoBehaviour
 
                 var checkCoords = new Vector3Int(coords.x + x, coords.y + y);
 
-                if (_cells.ContainsKey(checkCoords) && _cells[checkCoords].IsFlagged)
-                    counter++;
+                if (_cells.ContainsKey(checkCoords))
+                {
+                    if (_cells[checkCoords].IsFlagged)
+                        counter++;
+                }
             }
         }
 
@@ -206,17 +219,17 @@ public class GameGridDrawerView : MonoBehaviour
         return false;
     }
 
-    private void OpenTileAround(Vector3Int coords, List<Vector3Int> clickBuffer)
+    private void OpenTileAround(Vector3Int coords, List<Vector3Int> clickBuffer, bool recurce = true)
     {
-        HandleClick(new Vector3Int(coords.x - 1, coords.y), clickBuffer).Forget();
-        HandleClick(new Vector3Int(coords.x + 1, coords.y), clickBuffer).Forget();
-        HandleClick(new Vector3Int(coords.x, coords.y - 1), clickBuffer).Forget();
-        HandleClick(new Vector3Int(coords.x, coords.y + 1), clickBuffer).Forget();
+        HandleClick(new Vector3Int(coords.x - 1, coords.y), clickBuffer, recurce).Forget();
+        HandleClick(new Vector3Int(coords.x + 1, coords.y), clickBuffer, recurce).Forget();
+        HandleClick(new Vector3Int(coords.x, coords.y - 1), clickBuffer, recurce).Forget();
+        HandleClick(new Vector3Int(coords.x, coords.y + 1), clickBuffer, recurce).Forget();
 
-        HandleClick(new Vector3Int(coords.x - 1, coords.y + 1), clickBuffer).Forget();
-        HandleClick(new Vector3Int(coords.x - 1, coords.y - 1), clickBuffer).Forget();
-        HandleClick(new Vector3Int(coords.x + 1, coords.y + 1), clickBuffer).Forget();
-        HandleClick(new Vector3Int(coords.x + 1, coords.y - 1), clickBuffer).Forget();
+        HandleClick(new Vector3Int(coords.x - 1, coords.y + 1), clickBuffer, recurce).Forget();
+        HandleClick(new Vector3Int(coords.x - 1, coords.y - 1), clickBuffer, recurce).Forget();
+        HandleClick(new Vector3Int(coords.x + 1, coords.y + 1), clickBuffer, recurce).Forget();
+        HandleClick(new Vector3Int(coords.x + 1, coords.y - 1), clickBuffer, recurce).Forget();
     }
 
     public void DrawChunk(Vector3Int origin, Dictionary<Vector3Int, CellInfo> chunk)
@@ -250,7 +263,7 @@ public class GameGridDrawerView : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        
+
         foreach (var item in _cells)
         {
             if (item.Value.Value == -1)

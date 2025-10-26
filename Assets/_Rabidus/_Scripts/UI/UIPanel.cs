@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,9 +25,22 @@ public class UIPanel : MonoBehaviour
     [Button]
     public virtual void ShowPanel()
     {
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
+
         _isShown = true;
         _canvasGroup.alpha = 1.0f;
         _canvasGroup.blocksRaycasts = true;
+    }
+
+    public virtual void ShowPanel(float time)
+    {
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
+
+        _isShown = true;
+        _canvasGroup.blocksRaycasts = true;
+        _canvasGroup.DOFade(1.0f, time);
     }
 
     [Button]
@@ -35,6 +49,13 @@ public class UIPanel : MonoBehaviour
         _isShown = false;
         _canvasGroup.alpha = 0f;
         _canvasGroup.blocksRaycasts = false;
+    }
+
+    public virtual void HidePanel(float time)
+    {
+        _isShown = false;
+        _canvasGroup.blocksRaycasts = false;
+        _canvasGroup.DOFade(0f, time);
     }
 
     [Button]
