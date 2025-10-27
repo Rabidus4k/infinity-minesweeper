@@ -11,7 +11,7 @@ public class AutoTiledSprite : MonoBehaviour
     private SpriteRenderer sr;
     private Vector2 tileSize;
     private Material mat;
-    private static string texProp = "_BaseMap";
+    private static string texProp = "_MainTex";
 
     private void Awake()
     {

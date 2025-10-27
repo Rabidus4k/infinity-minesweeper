@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Lean.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 using VInspector;
@@ -6,7 +7,7 @@ using Zenject;
 
 public class GameGridDrawerView : MonoBehaviour
 {
-    [SerializeField] private CellView _cell;
+    [SerializeField] private LeanGameObjectPool _cellPool;
     [SerializeField] private SerializedDictionary<int, Sprite> _sprites = new SerializedDictionary<int, Sprite>();
     [SerializeField] private UINotificationInfo _notificationInfo;
 
@@ -33,12 +34,13 @@ public class GameGridDrawerView : MonoBehaviour
             _cells.Add(item.Key, new CellInfo(0));
         }
 
-        Random.InitState(_gameViewModel.Config.Value.Seed);
+        if (_gameViewModel.Config.Value.Seed != 0)
+            Random.InitState(_gameViewModel.Config.Value.Seed);
     }
 
     private void Start()
     {
-        DrawChunk(Vector3Int.zero, _cells);
+        DrawChunk(Vector3Int.zero, _cells).Forget();
         HandleClick(Vector3Int.zero);
     }
 
@@ -68,7 +70,7 @@ public class GameGridDrawerView : MonoBehaviour
                 _cells.Add(cell.Key, cell.Value);
             }
 
-            DrawChunk(origin, chunk);
+            DrawChunk(origin, chunk).Forget();
 
             HandleRightClick(coords);
         }
@@ -131,7 +133,7 @@ public class GameGridDrawerView : MonoBehaviour
                 _cells.Add(cell.Key, cell.Value);
             }
 
-            DrawChunk(origin, chunk);
+            DrawChunk(origin, chunk).Forget();
 
             HandleClick(coords);
         }
@@ -198,7 +200,7 @@ public class GameGridDrawerView : MonoBehaviour
             }
         }
 
-        return counter >= needCount;
+        return counter == needCount;
     }
 
     private bool CheckNeighbours(Vector3Int coords)
@@ -232,7 +234,7 @@ public class GameGridDrawerView : MonoBehaviour
         HandleClick(new Vector3Int(coords.x + 1, coords.y - 1), clickBuffer, recurce).Forget();
     }
 
-    public void DrawChunk(Vector3Int origin, Dictionary<Vector3Int, CellInfo> chunk)
+    public async UniTask DrawChunk(Vector3Int origin, Dictionary<Vector3Int, CellInfo> chunk)
     {
         GameObject chunkOn = new GameObject("Chunk");
         var parent = chunkOn.transform;
@@ -241,12 +243,14 @@ public class GameGridDrawerView : MonoBehaviour
         {
             if (_spawnedCell.ContainsKey(item.Key)) continue;
 
-            var cellInstance = Instantiate(_cell, item.Key, Quaternion.identity, parent);
+            var cellInstance = _cellPool.Spawn(item.Key, Quaternion.identity, parent).GetComponent<CellView>();
             _spawnedCell.Add(item.Key, cellInstance);
 
             cellInstance.Initialize(null);
             //cellInstance.Initialize(_sprites[item.Value.Value]);
         }
+
+        await UniTask.WaitForEndOfFrame();
     }
 
     private Vector3Int GetGridOrigin(Vector3Int coords)
