@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +8,7 @@ public class CurrencyView : MonoBehaviour
     protected ICurrencyViewModel _currencyViewModel;
 
     [Inject]
-    private void Construct(ICurrencyViewModel currencyViewModel)
+    private void Construct(ICurrencyViewModel currencyViewModel, IPopupService popupService)
     {
         _currencyViewModel = currencyViewModel;
         _currencyViewModel.Gems.OnChanged += SetGems;

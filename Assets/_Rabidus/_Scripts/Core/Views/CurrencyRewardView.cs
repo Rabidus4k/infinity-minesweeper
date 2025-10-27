@@ -6,7 +6,6 @@ public class CurrencyRewardView : MonoBehaviour
     [SerializeField] protected int _rewardAmmount;
     [SerializeField] private TMPro.TextMeshProUGUI _rewardText;
 
-
     protected ICurrencyViewModel _currencyViewModel;
 
     [Inject]
@@ -18,7 +17,9 @@ public class CurrencyRewardView : MonoBehaviour
     private void Awake()
     {
         if (_rewardText != null)
+        {
             _rewardText.SetText(_rewardAmmount.ToString());
+        }
     }
 
     public void ClaimReward()

@@ -15,7 +15,7 @@ public class SceneInstaller : MonoInstaller
         BindConfigs();
         
         BindModels();
-        BindSaves();
+        BindServices();
 
         BindViewModels();
         BindFactories();
@@ -23,7 +23,7 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<UINotificationManager>().FromInstance(_notificationManager).AsSingle();
     }
 
-    private void BindSaves()
+    private void BindServices()
     {
         Container.Bind<ISaveService>().To<SaveService>().AsSingle().NonLazy();
     }
