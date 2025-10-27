@@ -47,6 +47,8 @@ public class GameGridDrawerView : MonoBehaviour
 
         if (_gameViewModel.Config.Value.Seed != 0)
             Random.InitState(_gameViewModel.Config.Value.Seed);
+
+        Debug.Log($"Seed: {Random.state}");
     }
 
     private void Start()
@@ -249,7 +251,7 @@ public class GameGridDrawerView : MonoBehaviour
 
                 if (_gameViewModel.Cells.Value.ContainsKey(checkCoords))
                 {
-                    if (_gameViewModel.Cells.Value[checkCoords].IsFlagged)
+                    if (_gameViewModel.Cells.Value[checkCoords].IsFlagged || (_gameViewModel.Cells.Value[checkCoords].IsOpened && _gameViewModel.Cells.Value[checkCoords].Value == -1))
                         counter++;
                 }
             }
