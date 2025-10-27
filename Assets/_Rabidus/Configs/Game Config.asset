@@ -19,6 +19,7 @@ MonoBehaviour:
         Value: 0
         IsOpened: 0
         IsFlagged: 0
+        Ignore: 0
       index: 0
       isKeyRepeated: 0
     - Key: {x: -1, y: 0, z: 0}
@@ -26,6 +27,7 @@ MonoBehaviour:
         Value: 0
         IsOpened: 0
         IsFlagged: 0
+        Ignore: 0
       index: 1
       isKeyRepeated: 0
     - Key: {x: -1, y: -1, z: 0}
@@ -33,6 +35,7 @@ MonoBehaviour:
         Value: 0
         IsOpened: 0
         IsFlagged: 0
+        Ignore: 0
       index: 2
       isKeyRepeated: 0
     - Key: {x: 0, y: 1, z: 0}
@@ -40,6 +43,7 @@ MonoBehaviour:
         Value: 0
         IsOpened: 0
         IsFlagged: 0
+        Ignore: 0
       index: 3
       isKeyRepeated: 0
     - Key: {x: 0, y: 0, z: 0}
@@ -47,6 +51,7 @@ MonoBehaviour:
         Value: 0
         IsOpened: 0
         IsFlagged: 0
+        Ignore: 0
       index: 4
       isKeyRepeated: 0
     - Key: {x: 0, y: -1, z: 0}
@@ -54,6 +59,7 @@ MonoBehaviour:
         Value: 0
         IsOpened: 0
         IsFlagged: 0
+        Ignore: 0
       index: 5
       isKeyRepeated: 0
     - Key: {x: 1, y: 1, z: 0}
@@ -61,6 +67,7 @@ MonoBehaviour:
         Value: 0
         IsOpened: 0
         IsFlagged: 0
+        Ignore: 0
       index: 6
       isKeyRepeated: 0
     - Key: {x: 1, y: 0, z: 0}
@@ -68,6 +75,7 @@ MonoBehaviour:
         Value: 0
         IsOpened: 0
         IsFlagged: 0
+        Ignore: 0
       index: 7
       isKeyRepeated: 0
     - Key: {x: 1, y: -1, z: 0}
@@ -75,9 +83,10 @@ MonoBehaviour:
         Value: 0
         IsOpened: 0
         IsFlagged: 0
+        Ignore: 0
       index: 8
       isKeyRepeated: 0
     dividerPos: 0.33
   <Size>k__BackingField: 8
-  <Seed>k__BackingField: 123
+  <Seed>k__BackingField: 0
   <MinesPerChunk>k__BackingField: 20

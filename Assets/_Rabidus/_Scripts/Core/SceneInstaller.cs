@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,18 +8,24 @@ public class SceneInstaller : MonoInstaller
     [SerializeField] private GameConfig _gameConfig;
 
     [SerializeField] private GridView _gridView;
-    [SerializeField] private UICoordsButton _uiCoordsButton;
     [SerializeField] private UINotificationManager _notificationManager;
 
     public override void InstallBindings()
     {
         BindConfigs();
+        
         BindModels();
+        BindSaves();
+
         BindViewModels();
         BindFactories();
 
         Container.Bind<UINotificationManager>().FromInstance(_notificationManager).AsSingle();
-        //Container.BindFactory<UICoordsButton, UICoordsButton.Factory>().FromComponentInNewPrefab(_uiCoordsButton).UnderTransformGroup("Grids"); ;
+    }
+
+    private void BindSaves()
+    {
+        Container.Bind<ISaveService>().To<SaveService>().AsSingle().NonLazy();
     }
 
     private void BindFactories()

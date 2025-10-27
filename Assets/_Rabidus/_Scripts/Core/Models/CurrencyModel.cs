@@ -7,6 +7,11 @@ public class CurrencyModel : ICurrencyModel
         Gems += value;
     }
 
+    public void LoadData(object data)
+    {
+        Gems = ((CurrencySaveData)data).Gems;
+    }
+
     public void SpendGems(int value)
     {
         Gems -= value;
@@ -23,7 +28,7 @@ public class CurrencyModel : ICurrencyModel
     }
 }
 
-public interface ICurrencyModel
+public interface ICurrencyModel : ILoadable
 {
     public int Gems { get; }
 

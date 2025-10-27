@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using VInspector;
 using Zenject;
-using static UnityEngine.UI.Image;
 
 public class GridView : MonoBehaviour
 {
@@ -43,7 +42,7 @@ public class GridView : MonoBehaviour
             if (_addedCells.ContainsKey(coords)) return;
             _addedCells.Add(coords, cell);
 
-            if (cell.Value == -1)
+            if (cell.Value == -1 && cell.Ignore == false)
                 SetState(GridStates.Death);
 
             AddValue(1);
@@ -60,10 +59,20 @@ public class GridView : MonoBehaviour
             else if (!cell.IsFlagged)
             {
                 if (_addedCells.ContainsKey(coords))
+                {
                     _addedCells.Remove(coords);
-
-                AddValue(-1);
+                    AddValue(-1);
+                }
             }
+        }
+
+
+        if (_value == _maxValue && CurrentState == GridStates.None)
+        {
+            if (cell.Ignore == false)
+                SetState(GridStates.Reward);
+            else
+                SetState(GridStates.Opened);
         }
     }
 
@@ -71,17 +80,16 @@ public class GridView : MonoBehaviour
     {
         _value += ammount;
         _valueText.SetText(_value.ToString());
-
-        if (_value == _maxValue)
-        {
-            if (CurrentState == GridStates.None)
-                SetState(GridStates.Opened);
-        }
     }
 
     public void Reviwe()
     {
         SetState(GridStates.Reviwe);
+    }
+
+    public void Opened()
+    {
+        SetState(GridStates.Opened);
     }
 
     public void SetState(GridStates state)
@@ -97,12 +105,39 @@ public class GridView : MonoBehaviour
             case GridStates.None:
                 {
                     if (_value == _maxValue)
-                        SetState(GridStates.Opened);
+                        SetState(GridStates.Reward);
                     break;
                 }
             case GridStates.Reviwe:
                 {
+                    foreach (var cell in _addedCells)
+                    {
+                        if (cell.Value.IsOpened && cell.Value.Value == -1)
+                        {
+                            _gameViewModel.Cells.Value[cell.Key] = new CellInfo()
+                            {
+                                Value = cell.Value.Value,
+                                IsFlagged = cell.Value.IsFlagged,
+                                IsOpened = cell.Value.IsOpened,
+                                Ignore = true
+                            };
+                        }
+                    }
                     SetState(GridStates.None);
+                    break;
+                }
+            case GridStates.Reward:
+                {
+                    foreach (var cell in _addedCells)
+                    {
+                        _gameViewModel.Cells.Value[cell.Key] = new CellInfo()
+                        {
+                            Value = cell.Value.Value,
+                            IsFlagged = cell.Value.IsFlagged,
+                            IsOpened = cell.Value.IsOpened,
+                            Ignore = true
+                        };
+                    }
                     break;
                 }
         }

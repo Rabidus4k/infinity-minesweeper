@@ -19,18 +19,29 @@ public class GameGridDrawerView : MonoBehaviour
     private IInputViewModel _inputViewModel;
     private IGameViewModel _gameViewModel;
     private IScoreViewModel _scoreViewModel;
+    private ISaveService _saveService;
+
     private UINotificationManager _notificationManager;
 
     [Inject]
-    private void Construct(IInputViewModel inputViewModel, IGameViewModel gameViewModel, IScoreViewModel scoreViewModel, UINotificationManager uINotificationManager, GridView.Factory factory)
+    private void Construct
+        (
+            IInputViewModel inputViewModel, 
+            IGameViewModel gameViewModel, 
+            IScoreViewModel scoreViewModel,
+            UINotificationManager uINotificationManager,
+            GridView.Factory factory,
+            ISaveService saveService
+        )
     {
         _notificationManager = uINotificationManager;
 
         _inputViewModel = inputViewModel;
-        _inputViewModel.LMBCoords.OnChanged += HandleMouseClick;
+        _inputViewModel.LMBCoords.OnChanged += HandleLeftClick;
         _inputViewModel.RMBCoords.OnChanged += HandleRightClick;
         _gameViewModel = gameViewModel;
         _scoreViewModel = scoreViewModel;
+        _saveService = saveService;
 
         _gridFactory = factory;
 
@@ -40,23 +51,35 @@ public class GameGridDrawerView : MonoBehaviour
 
     private void Start()
     {
-        DrawChunk(Vector3Int.zero, _gameViewModel.Cells.Value).Forget();
-        HandleClick(Vector3Int.zero);
+        DrawChunkAsync(Vector3Int.zero, _gameViewModel.Cells.Value).Forget();
+        HandleClickAsync(Vector3Int.zero).Forget();
+
+        foreach (var item in _gameViewModel.Cells.Value)
+        {
+            UpdateGridInfo(item.Key);
+        }
     }
 
     protected void OnDisable()
     {
-        _inputViewModel.LMBCoords.OnChanged -= HandleMouseClick;
+        _inputViewModel.LMBCoords.OnChanged -= HandleLeftClick;
         _inputViewModel.RMBCoords.OnChanged -= HandleRightClick;
     }
 
     private void HandleRightClick(Vector3Int coords)
+    {
+        HandleRightClickAsync(coords).Forget();
+    }
+
+    private async UniTask HandleRightClickAsync(Vector3Int coords)
     {
         if (_gameViewModel.Cells.Value.ContainsKey(coords))
         {
             if (_gameViewModel.Cells.Value[coords].IsOpened) return;
 
             FlagTile(coords);
+            UpdateGridInfo(coords);
+            _saveService.Save();
         }
         else
         {
@@ -69,19 +92,17 @@ public class GameGridDrawerView : MonoBehaviour
                 _gameViewModel.Cells.Value.Add(cell.Key, cell.Value);
             }
 
-            DrawChunk(origin, chunk).Forget();
+            await DrawChunkAsync(origin, chunk);
 
             HandleRightClick(coords);
         }
-
-        UpdateGridInfo(coords);
     }
 
-    private void HandleMouseClick(Vector3Int coords)
+    private void HandleLeftClick(Vector3Int coords)
     {
         if (CheckNeighbours(coords))
         {
-            HandleClick(coords);
+            HandleClickAsync(coords).Forget();
         }
         else
             _notificationManager.SendNotification(_notificationInfo);
@@ -90,7 +111,7 @@ public class GameGridDrawerView : MonoBehaviour
     private void UpdateGridInfo(Vector3Int coords)
     {
         Vector3Int origin = GridHelper.ConvertToGridCoords(coords, _gameViewModel.Config.Value.Size);
-        Debug.Log($"Update grid: {origin}");
+
         if (!_gridViews.ContainsKey(origin))
         {
             var gridView = _gridFactory.Create();
@@ -104,9 +125,12 @@ public class GameGridDrawerView : MonoBehaviour
         _gridViews[origin].RefreshCell(coords);
     }
 
-    private void HandleClick(Vector3Int coords)
+    private async UniTask HandleClickAsync(Vector3Int coords)
     {
-        HandleClick(coords, new List<Vector3Int>()).Forget();
+        await HandleClick(coords, new List<Vector3Int>());
+
+        UpdateGridInfo(coords);
+        _saveService.Save();
     }
 
     private async UniTask HandleClick(Vector3Int coords, List<Vector3Int> clickBuffer, bool recurce = true)
@@ -114,7 +138,6 @@ public class GameGridDrawerView : MonoBehaviour
         if (clickBuffer != null)
         {
             if (clickBuffer.Contains(coords)) return;
-
             clickBuffer.Add(coords);
         }
 
@@ -127,14 +150,13 @@ public class GameGridDrawerView : MonoBehaviour
                 await UniTask.WaitForSeconds(0.01f);
                 
                 if (recurce)
-                    OpenTileAround(coords, clickBuffer, false);
+                    await OpenTileAround(coords, clickBuffer, false);
             }
             else if (_gameViewModel.Cells.Value[coords].Value == 0 && _gameViewModel.Cells.Value[coords].IsOpened == false)
             {
                 OpenTile(coords);
-                await UniTask.WaitForSeconds(0.01f);
 
-                OpenTileAround(coords, clickBuffer);
+                await OpenTileAround(coords, clickBuffer);
             }
             else
             {
@@ -152,12 +174,9 @@ public class GameGridDrawerView : MonoBehaviour
                 _gameViewModel.Cells.Value.Add(cell.Key, cell.Value);
             }
 
-            DrawChunk(origin, chunk).Forget();
-
-            HandleClick(coords);
+            await DrawChunkAsync(origin, chunk);
+            await HandleClick(coords, new List<Vector3Int>());
         }
-
-        UpdateGridInfo(coords);
     }
 
     private void FlagTile(Vector3Int coords)
@@ -251,20 +270,20 @@ public class GameGridDrawerView : MonoBehaviour
         return false;
     }
 
-    private void OpenTileAround(Vector3Int coords, List<Vector3Int> clickBuffer, bool recurce = true)
+    private async UniTask OpenTileAround(Vector3Int coords, List<Vector3Int> clickBuffer, bool recurce = true)
     {
-        HandleClick(new Vector3Int(coords.x - 1, coords.y), clickBuffer, recurce).Forget();
-        HandleClick(new Vector3Int(coords.x + 1, coords.y), clickBuffer, recurce).Forget();
-        HandleClick(new Vector3Int(coords.x, coords.y - 1), clickBuffer, recurce).Forget();
-        HandleClick(new Vector3Int(coords.x, coords.y + 1), clickBuffer, recurce).Forget();
+        await HandleClick(new Vector3Int(coords.x - 1, coords.y), clickBuffer, recurce);
+        await HandleClick(new Vector3Int(coords.x + 1, coords.y), clickBuffer, recurce);
+        await HandleClick(new Vector3Int(coords.x, coords.y - 1), clickBuffer, recurce);
+        await HandleClick(new Vector3Int(coords.x, coords.y + 1), clickBuffer, recurce);
 
-        HandleClick(new Vector3Int(coords.x - 1, coords.y + 1), clickBuffer, recurce).Forget();
-        HandleClick(new Vector3Int(coords.x - 1, coords.y - 1), clickBuffer, recurce).Forget();
-        HandleClick(new Vector3Int(coords.x + 1, coords.y + 1), clickBuffer, recurce).Forget();
-        HandleClick(new Vector3Int(coords.x + 1, coords.y - 1), clickBuffer, recurce).Forget();
+        await HandleClick(new Vector3Int(coords.x - 1, coords.y + 1), clickBuffer, recurce);
+        await HandleClick(new Vector3Int(coords.x - 1, coords.y - 1), clickBuffer, recurce);
+        await HandleClick(new Vector3Int(coords.x + 1, coords.y + 1), clickBuffer, recurce);
+        await HandleClick(new Vector3Int(coords.x + 1, coords.y - 1), clickBuffer, recurce);
     }
 
-    public async UniTask DrawChunk(Vector3Int origin, Dictionary<Vector3Int, CellInfo> chunk)
+    public async UniTask DrawChunkAsync(Vector3Int origin, Dictionary<Vector3Int, CellInfo> chunk)
     {
         GameObject chunkOn = new GameObject("Chunk");
         var parent = chunkOn.transform;
@@ -276,8 +295,23 @@ public class GameGridDrawerView : MonoBehaviour
             var cellInstance = _cellPool.Spawn(item.Key, Quaternion.identity, parent).GetComponent<CellView>();
             _spawnedCell.Add(item.Key, cellInstance);
 
-            cellInstance.Initialize(null);
-            //cellInstance.Initialize(_sprites[item.Value.Value]);
+            if (item.Value.IsOpened)
+            {
+                cellInstance.Initialize(_sprites[item.Value.Value]);
+                _scoreViewModel.AddScore(1);
+            }
+            else
+            {
+                if (item.Value.IsFlagged)
+                {
+                    cellInstance.Initialize(_sprites[-2]);
+                }
+                else
+                {
+                    cellInstance.Initialize(null);
+                }
+            }
+
         }
 
         await UniTask.WaitForEndOfFrame();

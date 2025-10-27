@@ -1,7 +1,8 @@
 public enum GridStates 
 {
     None,
-    Opened,
+    Reward,
     Death,
-    Reviwe
+    Reviwe,
+    Opened
 }

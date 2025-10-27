@@ -7,6 +7,8 @@ public class CurrencyViewModel : ICurrencyViewModel
     public CurrencyViewModel(ICurrencyModel model) 
     {
         _model = model;
+
+        Gems.Value = _model.Gems;
     }
 
     public void AddGems(int value)

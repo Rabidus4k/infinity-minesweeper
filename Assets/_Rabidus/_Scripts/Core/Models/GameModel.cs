@@ -15,9 +15,21 @@ public class GameModel : IGameModel
             Cells.Add(item.Key, item.Value);
         }
     }
+
+    public void LoadData(object data)
+    {
+        var loadedCells = ((GameSaveData)data).Cells;
+
+        foreach (var item in loadedCells)
+        {
+            if (Cells.ContainsKey(item.Key)) continue;
+
+            Cells.Add(item.Key, item.Value);
+        }
+    }
 }
 
-public interface IGameModel
+public interface IGameModel : ILoadable
 {
     public IGameConfig Config { get; }
     public Dictionary<Vector3Int, CellInfo> Cells { get; }
