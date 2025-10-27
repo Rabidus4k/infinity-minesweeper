@@ -19,11 +19,13 @@ public class GridView : MonoBehaviour
     private UIPanel _currentPanel;
 
     protected IGameViewModel _gameViewModel;
+    protected ISaveService _saveService;
 
     [Inject]
-    private void Construct(IGameViewModel gameViewModel)
+    private void Construct(IGameViewModel gameViewModel, ISaveService saveService)
     {
         _gameViewModel = gameViewModel;
+        _saveService = saveService;
     }
 
     public void Initialize(int maxValue)
@@ -141,6 +143,8 @@ public class GridView : MonoBehaviour
                     break;
                 }
         }
+
+        _saveService.Save();
     }
 
     private void ShowPanel(GridStates state)

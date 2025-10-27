@@ -51,8 +51,13 @@ public class GameGridDrawerView : MonoBehaviour
 
     private void Start()
     {
-        DrawChunkAsync(Vector3Int.zero, _gameViewModel.Cells.Value).Forget();
-        HandleClickAsync(Vector3Int.zero).Forget();
+        PrepareGameField().Forget();
+    }
+
+    private async UniTask PrepareGameField()
+    {
+        await DrawChunkAsync(Vector3Int.zero, _gameViewModel.Cells.Value);
+        await HandleClickAsync(Vector3Int.zero);
 
         foreach (var item in _gameViewModel.Cells.Value)
         {
@@ -129,7 +134,6 @@ public class GameGridDrawerView : MonoBehaviour
     {
         await HandleClick(coords, new List<Vector3Int>());
 
-        UpdateGridInfo(coords);
         _saveService.Save();
     }
 
@@ -177,6 +181,8 @@ public class GameGridDrawerView : MonoBehaviour
             await DrawChunkAsync(origin, chunk);
             await HandleClick(coords, new List<Vector3Int>());
         }
+
+        UpdateGridInfo(coords);
     }
 
     private void FlagTile(Vector3Int coords)
