@@ -23,9 +23,79 @@
                 "stringCollection": [
                     {
                         "key": "Configuration",
-                        "value": "FallbackConfiguration"
+                        "value": "MirraWebConfiguration"
                     }
                 ]
+            }
+        },
+        {
+            "key": "FallbackConfiguration",
+            "group": {
+                "boolCollection": [
+                    {
+                        "key": "IBootstrap.Visible",
+                        "value": true
+                    },
+                    {
+                        "key": "IData.Visible",
+                        "value": true
+                    }
+                ],
+                "intCollection": [],
+                "floatCollection": [],
+                "stringCollection": []
+            }
+        },
+        {
+            "key": "EditorConfiguration",
+            "group": {
+                "boolCollection": [
+                    {
+                        "key": "IData.Visible",
+                        "value": true
+                    }
+                ],
+                "intCollection": [],
+                "floatCollection": [],
+                "stringCollection": []
+            }
+        },
+        {
+            "key": "MirraWebConfiguration",
+            "group": {
+                "boolCollection": [
+                    {
+                        "key": "IData.Visible",
+                        "value": false
+                    },
+                    {
+                        "key": "CrazyGames_PropertyGroup.Visible",
+                        "value": true
+                    },
+                    {
+                        "key": "Lagged_PropertyGroup.Visible",
+                        "value": true
+                    },
+                    {
+                        "key": "Y8_PropertyGroup.Visible",
+                        "value": true
+                    },
+                    {
+                        "key": "Logger_PropertyGroup.Visible",
+                        "value": false
+                    },
+                    {
+                        "key": "OK_PropertyGroup.Visible",
+                        "value": false
+                    },
+                    {
+                        "key": "VK_PropertyGroup.Visible",
+                        "value": false
+                    }
+                ],
+                "intCollection": [],
+                "floatCollection": [],
+                "stringCollection": []
             }
         }
     ]
