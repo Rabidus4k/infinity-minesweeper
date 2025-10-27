@@ -1,11 +1,7 @@
 [System.Serializable]
-public class CellInfo
+public struct CellInfo
 {
     public int Value;
-    public bool IsOpened = false;
-    public bool IsFlagged = false;
-    public CellInfo(int value)
-    {
-        Value = value;
-    }
+    public bool IsOpened;
+    public bool IsFlagged;
 }

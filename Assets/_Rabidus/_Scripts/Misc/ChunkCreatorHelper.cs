@@ -17,7 +17,12 @@ public static class ChunkCreatorHelper
                     chunk.Add(coords, cells[coords]);
                 else
                 {
-                    CellInfo cell = new CellInfo(0);
+                    CellInfo cell = new CellInfo()
+                    {
+                        IsFlagged = false,
+                        IsOpened = false,
+                        Value = 0
+                    };
                     chunk.Add(coords, cell);
                 }
             }
@@ -41,7 +46,12 @@ public static class ChunkCreatorHelper
             if (cells.ContainsKey(mineCoords + new Vector3Int(1, 0))) continue;
             if (cells.ContainsKey(mineCoords + new Vector3Int(1, -1))) continue;
 
-            chunk[mineCoords].Value = -1;
+            chunk[mineCoords] = new CellInfo()
+            {
+                IsFlagged = false,
+                IsOpened = false,
+                Value = -1
+            };
         }
 
         //Fill values
@@ -63,11 +73,15 @@ public static class ChunkCreatorHelper
                         int ny = y + dy;
 
                         Vector3Int neighbourCoords = new Vector3Int(origin.x + nx, origin.y + ny);
-                        var neighbourCell = chunk[neighbourCoords];
 
-                        if (neighbourCell.Value == -1) continue;
+                        if (chunk[neighbourCoords].Value == -1) continue;
 
-                        neighbourCell.Value++;
+                        chunk[neighbourCoords] = new CellInfo()
+                        {
+                            IsFlagged = false,
+                            IsOpened = false,
+                            Value = chunk[neighbourCoords].Value + 1
+                        };
                     }
                 }
             }

@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using VInspector;
 using Zenject;
+using static UnityEngine.UI.Image;
 
 public class GridView : MonoBehaviour
 {
@@ -13,12 +15,56 @@ public class GridView : MonoBehaviour
     private int _value = 0;
     private int _maxValue = 0;
 
+    private Dictionary<Vector3Int, CellInfo> _addedCells = new Dictionary<Vector3Int, CellInfo>();
+
     private UIPanel _currentPanel;
 
-    public void Initialize(int value, int maxValue)
+    protected IGameViewModel _gameViewModel;
+
+    [Inject]
+    private void Construct(IGameViewModel gameViewModel)
+    {
+        _gameViewModel = gameViewModel;
+    }
+
+    public void Initialize(int maxValue)
     {
         _maxValue = maxValue;
-        AddValue(value);
+    }
+
+    public void RefreshCell(Vector3Int coords)
+    {
+        if (!_gameViewModel.Cells.Value.ContainsKey(coords)) return;
+
+        var cell = _gameViewModel.Cells.Value[coords];
+
+        if (cell.IsOpened)
+        {
+            if (_addedCells.ContainsKey(coords)) return;
+            _addedCells.Add(coords, cell);
+
+            if (cell.Value == -1)
+                SetState(GridStates.Death);
+
+            AddValue(1);
+        }
+        else
+        {
+            if (cell.IsFlagged && cell.Value == -1)
+            {
+                if (_addedCells.ContainsKey(coords)) return;
+                _addedCells.Add(coords, cell);
+
+                AddValue(1);
+            }
+            else if (!cell.IsFlagged)
+            {
+                if (_addedCells.ContainsKey(coords))
+                    _addedCells.Remove(coords);
+
+                AddValue(-1);
+            }
+        }
     }
 
     public void AddValue(int ammount)

@@ -79,5 +79,5 @@ MonoBehaviour:
       isKeyRepeated: 0
     dividerPos: 0.33
   <Size>k__BackingField: 8
-  <Seed>k__BackingField: 0
+  <Seed>k__BackingField: 123
   <MinesPerChunk>k__BackingField: 20
