@@ -60,7 +60,7 @@ public class GameGridDrawerView : MonoBehaviour
         }
         else
         {
-            Vector3Int origin = GetGridOrigin(coords);
+            Vector3Int origin = GridHelper.ConvertToGridCoords(coords, _gameViewModel.Config.Value.Size);
 
             var chunk = ChunkCreatorHelper.GenerateChunk(_cells, origin, _gameViewModel.Config.Value);
 
@@ -123,8 +123,7 @@ public class GameGridDrawerView : MonoBehaviour
         }
         else
         {
-            Vector3Int origin = GetGridOrigin(coords);
-
+            Vector3Int origin = GridHelper.ConvertToGridCoords(coords, _gameViewModel.Config.Value.Size);
             var chunk = ChunkCreatorHelper.GenerateChunk(_cells, origin, _gameViewModel.Config.Value);
 
             foreach (var cell in chunk)
@@ -251,18 +250,6 @@ public class GameGridDrawerView : MonoBehaviour
         }
 
         await UniTask.WaitForEndOfFrame();
-    }
-
-    private Vector3Int GetGridOrigin(Vector3Int coords)
-    {
-        Vector3Int origin = new Vector3Int
-        (
-            Mathf.FloorToInt((float)coords.x / _gameViewModel.Config.Value.Size) * _gameViewModel.Config.Value.Size,
-            Mathf.FloorToInt((float)coords.y / _gameViewModel.Config.Value.Size) * _gameViewModel.Config.Value.Size,
-            0
-        );
-
-        return origin;
     }
 
     private void OnDrawGizmos()

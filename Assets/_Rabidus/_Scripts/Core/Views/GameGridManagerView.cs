@@ -1,20 +1,15 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using VInspector;
 using Zenject;
 
 public class GameGridManagerView : MonoBehaviour
 {
-    
     private Dictionary<Vector3Int, List<Cell>> _grid = new Dictionary<Vector3Int, List<Cell>>();
     private Dictionary<Vector3Int, GridView> _gridViews = new Dictionary<Vector3Int, GridView>();
     private GridView.Factory _gridFactory;
 
-
     protected IInputViewModel _inputViewModel;
     protected IGameViewModel _gameViewModel;
-
 
     [Inject]
     private void Construct(IInputViewModel inputViewModel, IGameViewModel gameViewModel, GridView.Factory factory)
@@ -34,14 +29,8 @@ public class GameGridManagerView : MonoBehaviour
 
     private void HandleSelectCell(Cell cell)
     {
-        Vector3Int origin = new Vector3Int
-            (
-                Mathf.FloorToInt((float)cell.Coords.x / _gameViewModel.Config.Value.Size) * _gameViewModel.Config.Value.Size,
-                Mathf.FloorToInt((float)cell.Coords.y / _gameViewModel.Config.Value.Size) * _gameViewModel.Config.Value.Size,
-                0
-            );
+        Vector3Int origin = GridHelper.ConvertToGridCoords(cell.Coords, _gameViewModel.Config.Value.Size);
 
-        //Initialize grid view
         if (!_grid.ContainsKey(origin))
         {
             _grid.Add(origin, new List<Cell>());
