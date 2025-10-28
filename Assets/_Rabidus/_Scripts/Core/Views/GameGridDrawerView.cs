@@ -321,6 +321,5 @@ public class GameGridDrawerView : MonoBehaviour
 
         }
 
-        await UniTask.WaitForEndOfFrame();
     }
 }

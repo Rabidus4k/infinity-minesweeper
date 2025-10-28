@@ -8,6 +8,7 @@ public class BootsTrapLoader : MonoBehaviour
     {
         MirraSDK.WaitForProviders(static () => {
             SceneManager.LoadScene("GameScene");
+            MirraSDK.Analytics.GameIsReady();
         });
     }
 }

@@ -3,12 +3,19 @@ using Zenject;
 
 public class SaveControllerView : MonoBehaviour
 {
+    [SerializeField] private float _saveInterval = 5f;
+
     private ISaveService _saveService;
 
     [Inject]
     private void Construct(ISaveService saveService)
     {
         _saveService = saveService;
+    }
+
+    private void Start()
+    {
+        InvokeRepeating(nameof(SaveProgress), _saveInterval, _saveInterval);
     }
 
     private void OnEnable()

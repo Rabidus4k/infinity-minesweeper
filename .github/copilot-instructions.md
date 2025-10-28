@@ -2,7 +2,7 @@
 - Project name: infinity-minesweeper
 - Unity version: Unity 6000.2.2f1
 - Active game object:
-  - Name: Button-Menu
+  - Name: SaveControllerView
   - Tag: Untagged
-  - Layer: UI
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
