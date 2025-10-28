@@ -11,6 +11,8 @@ public class SceneInstaller : MonoInstaller
     [SerializeField] private UICoordsButton _coordsButton;
     [SerializeField] private UINotificationManager _notificationManager;
 
+    [SerializeField] private SoundManager _soundManager;
+
     public override void InstallBindings()
     {
         BindConfigs();
@@ -22,6 +24,7 @@ public class SceneInstaller : MonoInstaller
         BindFactories();
 
         Container.Bind<UINotificationManager>().FromInstance(_notificationManager).AsSingle();
+        Container.Bind<SoundManager>().FromInstance(_soundManager).AsSingle();
     }
 
     private void BindServices()

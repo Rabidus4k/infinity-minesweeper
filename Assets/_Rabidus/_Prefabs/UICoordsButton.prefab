@@ -1272,6 +1272,7 @@ GameObject:
   - component: {fileID: 1161564318890053721}
   - component: {fileID: 467880488068295782}
   - component: {fileID: 6159346074317275504}
+  - component: {fileID: 6685439750454986370}
   m_Layer: 5
   m_Name: Button-Apply
   m_TagString: Untagged
@@ -1396,6 +1397,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6685439750454986370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7007044652805952989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff6bd599620594288d06563cb7e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
+  _button: {fileID: 0}
+  _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
 --- !u!1 &7028265860420864788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,6 +1585,9 @@ MonoBehaviour:
   _xText: {fileID: 9149077295899116584}
   _yText: {fileID: 5872811035734459125}
   _nameText: {fileID: 3741770012626575063}
+  _coordsInfo:
+    Name: 
+    Coords: {x: 0, y: 0, z: 0}
 --- !u!1 &8219553016025078284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,6 +1894,7 @@ GameObject:
   - component: {fileID: 8806678109183947110}
   - component: {fileID: 797260642742536884}
   - component: {fileID: 6501030832797504057}
+  - component: {fileID: 9121089912704134323}
   m_Layer: 5
   m_Name: Button-Delete
   m_TagString: Untagged
@@ -2012,6 +2031,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &9121089912704134323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749106615661409600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff6bd599620594288d06563cb7e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
+  _button: {fileID: 0}
+  _sound: {fileID: 11400000, guid: 30f1b1cdc9707da4fa1d2d0d528ff1bd, type: 2}
 --- !u!1 &8959326682193561666
 GameObject:
   m_ObjectHideFlags: 0

@@ -61,9 +61,9 @@ public class UICoordsButton : UICustomButton
     private void OnValueChanged(string _)
     {
         if (int.TryParse(_xText.text, out int x))
-            _coordsInfo.Coords.x = x;
+            _coordsInfo.Coords.x = Mathf.Clamp(x, -100000, 100000);
         if (int.TryParse(_yText.text, out int y))
-            _coordsInfo.Coords.y = y;
+            _coordsInfo.Coords.y = Mathf.Clamp(y, -100000, 100000);
 
         _coordsInfo.Name = _nameText.text;
     }

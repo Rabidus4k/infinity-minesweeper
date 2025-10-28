@@ -7,10 +7,11 @@ public class CurrencyRewardView : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI _rewardText;
 
     protected ICurrencyViewModel _currencyViewModel;
-
+    protected SoundManager _soundManager;
     [Inject]
-    private void Construct(ICurrencyViewModel currencyViewModel)
+    private void Construct(ICurrencyViewModel currencyViewModel, SoundManager soundManager)
     {
+        _soundManager = soundManager;
         _currencyViewModel = currencyViewModel;
     }
 
@@ -24,11 +25,13 @@ public class CurrencyRewardView : MonoBehaviour
 
     public void ClaimReward()
     {
+        _soundManager.PlaySound("Coin");
         _currencyViewModel.AddGems(_rewardAmmount);
     }
 
     public void ClaimDoubleReward()
     {
+        _soundManager.PlaySound("Coin");
         _currencyViewModel.AddGems(_rewardAmmount * 2);
     }
 }

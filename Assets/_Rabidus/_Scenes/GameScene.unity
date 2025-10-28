@@ -8544,8 +8544,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291940817
+  m_fontColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -25049,6 +25049,7 @@ GameObject:
   - component: {fileID: 597727353}
   - component: {fileID: 597727356}
   - component: {fileID: 597727357}
+  - component: {fileID: 597727358}
   m_Layer: 5
   m_Name: UIResetSaveButton
   m_TagString: Untagged
@@ -25145,7 +25146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -25198,6 +25199,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!114 &597727358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597727351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff6bd599620594288d06563cb7e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
+  _button: {fileID: 0}
+  _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
 --- !u!1001 &597733918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29370,6 +29385,7 @@ GameObject:
   - component: {fileID: 691089683}
   - component: {fileID: 691089682}
   - component: {fileID: 691089685}
+  - component: {fileID: 691089686}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -29454,7 +29470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -29494,6 +29510,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!114 &691089686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691089679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff6bd599620594288d06563cb7e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
+  _button: {fileID: 0}
+  _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
 --- !u!1001 &692707133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37716,7 +37746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIPanel
   _canvasGroup: {fileID: 879053715}
-  _hideOnAwake: 0
+  _hideOnAwake: 1
 --- !u!225 &879053715
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -41656,6 +41686,7 @@ GameObject:
   - component: {fileID: 916078348}
   - component: {fileID: 916078347}
   - component: {fileID: 916078350}
+  - component: {fileID: 916078351}
   m_Layer: 5
   m_Name: Button-CreateCoords
   m_TagString: Untagged
@@ -41797,6 +41828,20 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &916078351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916078344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff6bd599620594288d06563cb7e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
+  _button: {fileID: 0}
+  _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
 --- !u!1001 &916249875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55063,8 +55108,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291940817
+  m_fontColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -55923,8 +55968,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291940817
+  m_fontColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -61200,6 +61245,7 @@ GameObject:
   - component: {fileID: 1357325209}
   - component: {fileID: 1357325208}
   - component: {fileID: 1357325211}
+  - component: {fileID: 1357325212}
   m_Layer: 5
   m_Name: Button-Menu
   m_TagString: Untagged
@@ -61336,6 +61382,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &1357325212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357325206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff6bd599620594288d06563cb7e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
+  _button: {fileID: 0}
+  _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
 --- !u!1001 &1358591399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -76824,6 +76884,76 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2293554364295580558, guid: 59ad3ea21083daa439350406523163f1, type: 3}
   m_PrefabInstance: {fileID: 1755649943}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1760464005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1760464006}
+  - component: {fileID: 1760464007}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1760464006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760464005}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1760464007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760464005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c6e762f712dab42bba8436adf417d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  _audioSourcePrefab: {fileID: 5171116014486111399, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+  _sameSoundMaxCount: 3
+  <DefaultSounds>k__BackingField:
+    serializedKvps:
+    - Key: Click
+      Value: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
+      index: 0
+      isKeyRepeated: 0
+    - Key: Coin
+      Value: {fileID: 11400000, guid: ad20dc3e66123964daa58665e5489f9b, type: 2}
+      index: 1
+      isKeyRepeated: 0
+    - Key: GridVictory
+      Value: {fileID: 11400000, guid: db93dd3c3928b784685476562d6462ca, type: 2}
+      index: 2
+      isKeyRepeated: 0
+    - Key: GridLose
+      Value: {fileID: 11400000, guid: b075d1e79d81d01469781325104908b1, type: 2}
+      index: 3
+      isKeyRepeated: 0
+    - Key: OpenCell
+      Value: {fileID: 11400000, guid: 66ee86342647f594d9553883dc632474, type: 2}
+      index: 4
+      isKeyRepeated: 0
+    dividerPos: 0.33
+  _debugSound: {fileID: 11400000, guid: db93dd3c3928b784685476562d6462ca, type: 2}
 --- !u!1001 &1762812946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79788,6 +79918,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 301247633323490517, guid: 8b19f88a1e3029c4d8a461c7e81f11b2, type: 3}
   m_PrefabInstance: {fileID: 1832027011}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1835103668
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2195497537488045768, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 429.68488
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195497537488045768, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 205.10278
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195497537488045768, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195497537488045768, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195497537488045768, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195497537488045768, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195497537488045768, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195497537488045768, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195497537488045768, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195497537488045768, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387954210572699327, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_Name
+      value: Audio Source
+      objectReference: {fileID: 0}
+    - target: {fileID: 5171116014486111399, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5171116014486111399, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_Volume
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 5171116014486111399, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec593136686ca543a2483d49ab35724, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 719aebb89e86dfa41bed80e696c65c3a, type: 3}
 --- !u!1001 &1836346971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81186,6 +81385,7 @@ MonoBehaviour:
   _gridView: {fileID: 967271888868390159, guid: 8aa3973e6dcdad34582a46384a7d6efc, type: 3}
   _coordsButton: {fileID: 8137682445113965076, guid: 17080f907875dde4da6c490d7ea7d6b6, type: 3}
   _notificationManager: {fileID: 421964936}
+  _soundManager: {fileID: 1760464007}
 --- !u!1001 &1869926315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81323,8 +81523,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291940817
+  m_fontColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -81940,6 +82140,7 @@ GameObject:
   - component: {fileID: 1889543372}
   - component: {fileID: 1889543371}
   - component: {fileID: 1889543374}
+  - component: {fileID: 1889543375}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -82024,7 +82225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -82064,6 +82265,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!114 &1889543375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889543368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff6bd599620594288d06563cb7e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
+  _button: {fileID: 0}
+  _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
 --- !u!1001 &1890536743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84904,6 +85119,7 @@ GameObject:
   - component: {fileID: 1982640161}
   - component: {fileID: 1982640160}
   - component: {fileID: 1982640163}
+  - component: {fileID: 1982640164}
   m_Layer: 5
   m_Name: UISaveButton
   m_TagString: Untagged
@@ -85000,7 +85216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -85040,6 +85256,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!114 &1982640164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982640157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff6bd599620594288d06563cb7e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
+  _button: {fileID: 0}
+  _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
 --- !u!1001 &1982830192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90566,3 +90796,5 @@ SceneRoots:
   - {fileID: 766985961}
   - {fileID: 899299798}
   - {fileID: 880954156}
+  - {fileID: 1760464006}
+  - {fileID: 1835103668}

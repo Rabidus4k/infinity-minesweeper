@@ -777,6 +777,7 @@ GameObject:
   - component: {fileID: 4175090501661108444}
   - component: {fileID: 2508393295295210332}
   - component: {fileID: 6275172164621915052}
+  - component: {fileID: 7116346459897002727}
   m_Layer: 5
   m_Name: Button-Claim
   m_TagString: Untagged
@@ -925,6 +926,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.3529412}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &7116346459897002727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5144900523260911695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff6bd599620594288d06563cb7e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
+  _button: {fileID: 0}
+  _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
 --- !u!1 &5316194751942630575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,6 +1153,7 @@ GameObject:
   - component: {fileID: 6971736867666088543}
   - component: {fileID: 8619411906870460805}
   - component: {fileID: 3856831798532635679}
+  - component: {fileID: 5564483330324167736}
   m_Layer: 5
   m_Name: Button-Claim Ads
   m_TagString: Untagged
@@ -1274,6 +1290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf85d0f074fc4d4cacc397a10f2b512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIRewardedAdsButton
+  _button: {fileID: 0}
   _rewardID: double_gems
   OnSuccess:
     m_PersistentCalls:
@@ -1302,6 +1319,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5564483330324167736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5942456585540847162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff6bd599620594288d06563cb7e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
+  _button: {fileID: 0}
+  _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
 --- !u!1 &6032749305088579040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1593,6 +1624,7 @@ GameObject:
   - component: {fileID: 1803436328763964437}
   - component: {fileID: 6495178812987196679}
   - component: {fileID: 3189815700904571505}
+  - component: {fileID: 906606689354102893}
   m_Layer: 5
   m_Name: Button-Claim Ads
   m_TagString: Untagged
@@ -1729,6 +1761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf85d0f074fc4d4cacc397a10f2b512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIRewardedAdsButton
+  _button: {fileID: 0}
   _rewardID: reviwe
   OnSuccess:
     m_PersistentCalls:
@@ -1745,6 +1778,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &906606689354102893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047445507475946135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff6bd599620594288d06563cb7e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
+  _button: {fileID: 0}
+  _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
 --- !u!1 &8329813618008989397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1894,6 +1941,7 @@ GameObject:
   - component: {fileID: 2877840031816026226}
   - component: {fileID: 1791492094660459126}
   - component: {fileID: 2764308595536091172}
+  - component: {fileID: 1586655649100999949}
   m_Layer: 5
   m_Name: Button-Claim
   m_TagString: Untagged
@@ -2030,6 +2078,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.3529412}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &1586655649100999949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593882195083790058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff6bd599620594288d06563cb7e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
+  _button: {fileID: 0}
+  _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
 --- !u!1 &8607094294039804060
 GameObject:
   m_ObjectHideFlags: 0

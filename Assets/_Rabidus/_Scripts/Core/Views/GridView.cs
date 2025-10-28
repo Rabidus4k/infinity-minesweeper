@@ -20,10 +20,12 @@ public class GridView : MonoBehaviour
     private UIPanel _currentPanel;
 
     protected IGameViewModel _gameViewModel;
+    private SoundManager _soundManager;
 
     [Inject]
-    private void Construct(IGameViewModel gameViewModel)
+    private void Construct(IGameViewModel gameViewModel, SoundManager soundManager)
     {
+        _soundManager = soundManager;
         _gameViewModel = gameViewModel;
     }
 
@@ -123,7 +125,7 @@ public class GridView : MonoBehaviour
                                 Ignore = true
                             };
 
-                            _gameViewModel.Cells.Value.Add(cell.Key, cellInfo);
+                            _gameViewModel.Cells.Value[cell.Key] = cellInfo;
                         }
                     }
                     SetState(GridStates.None);
@@ -131,6 +133,7 @@ public class GridView : MonoBehaviour
                 }
             case GridStates.Reward:
                 {
+                    _soundManager.PlaySound("GridVictory");
                     foreach (var cell in _addedCells)
                     {
                         var cellInfo  = new CellInfo()
@@ -143,6 +146,11 @@ public class GridView : MonoBehaviour
 
                         _gameViewModel.Cells.Value[cell.Key] = cellInfo;
                     }
+                    break;
+                }
+            case GridStates.Death:
+                {
+                    _soundManager.PlaySound("GridLose");
                     break;
                 }
         }

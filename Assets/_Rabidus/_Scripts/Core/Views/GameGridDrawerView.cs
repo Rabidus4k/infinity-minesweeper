@@ -21,7 +21,7 @@ public class GameGridDrawerView : MonoBehaviour
     private IScoreViewModel _scoreViewModel;
 
     private UINotificationManager _notificationManager;
-
+    private SoundManager _soundManager;
     [Inject]
     private void Construct
         (
@@ -30,9 +30,11 @@ public class GameGridDrawerView : MonoBehaviour
             IScoreViewModel scoreViewModel,
             UINotificationManager uINotificationManager,
             GridView.Factory factory,
-            ISaveService saveService
+            ISaveService saveService,
+            SoundManager soundManager
         )
     {
+        _soundManager = soundManager;
         _notificationManager = uINotificationManager;
 
         _inputViewModel = inputViewModel;
@@ -211,6 +213,8 @@ public class GameGridDrawerView : MonoBehaviour
                 cellInstance.Initialize(null);
             }
         }
+
+        _soundManager.PlaySound("OpenCell");
     }
 
     private void OpenTile(Vector3Int coords)
@@ -232,6 +236,7 @@ public class GameGridDrawerView : MonoBehaviour
             cellInstance.Initialize(_sprites[_gameViewModel.Cells.Value[coords].Value]);
         }
 
+        _soundManager.PlaySound("OpenCell");
         _scoreViewModel.AddScore(1);
     }
 

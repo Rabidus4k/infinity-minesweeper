@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739d23de47536c642953def3a21b3c69, type: 3}
+  m_Name: CompleteGrid
+  m_EditorClassIdentifier: Assembly-CSharp::Sound
+  Clip: {fileID: 8300000, guid: 94ad1aa2b5ae3f6489ba5a090160eef6, type: 3}
+  Volume: 0.35
+  Pitch: 1
+  Loop: 0
+  LifeTime: 1.5
