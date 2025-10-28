@@ -91,6 +91,10 @@
                     {
                         "key": "VK_PropertyGroup.Visible",
                         "value": false
+                    },
+                    {
+                        "key": "IPlayer.Visible",
+                        "value": true
                     }
                 ],
                 "intCollection": [],

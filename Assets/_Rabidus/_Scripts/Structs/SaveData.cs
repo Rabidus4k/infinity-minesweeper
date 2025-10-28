@@ -8,6 +8,7 @@ public class SaveData
     public CurrencySaveData CurrencyData;
     public ScoreSaveData ScoreData;
     public GameSaveData GameData;
+    public CoordsSaveData CoordsDate;
 }
 
 [Serializable]
@@ -37,6 +38,19 @@ public class ScoreSaveData
 }
 
 [Serializable]
+public class CoordsSaveData
+{
+    public List<CoordsInfo> CoordsInfo;
+
+    public CoordsSaveData() { }
+
+    public CoordsSaveData(ICoordsModel model)
+    {
+        CoordsInfo = model.CoordsInfo;
+    }
+}
+
+[Serializable]
 public class GameSaveData
 {
     public List<CellEntry> Cells = new List<CellEntry>();
@@ -61,4 +75,11 @@ public class CellEntry
 {
     public Vector3Int Key;
     public CellInfo Value;
+}
+
+[Serializable]
+public class CoordsInfo
+{
+    public string Name;
+    public Vector3Int Coords;
 }

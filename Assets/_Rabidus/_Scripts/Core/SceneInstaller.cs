@@ -8,6 +8,7 @@ public class SceneInstaller : MonoInstaller
     [SerializeField] private GameConfig _gameConfig;
 
     [SerializeField] private GridView _gridView;
+    [SerializeField] private UICoordsButton _coordsButton;
     [SerializeField] private UINotificationManager _notificationManager;
 
     public override void InstallBindings()
@@ -30,7 +31,8 @@ public class SceneInstaller : MonoInstaller
 
     private void BindFactories()
     {
-        Container.BindFactory<GridView, GridView.Factory>().FromComponentInNewPrefab(_gridView).UnderTransformGroup("Grids"); ;
+        Container.BindFactory<GridView, GridView.Factory>().FromComponentInNewPrefab(_gridView).UnderTransformGroup("Grids");
+        Container.BindFactory<UICoordsButton, UICoordsButton.Factory>().FromComponentInNewPrefab(_coordsButton);
     }
 
     private void BindViewModels()
@@ -39,6 +41,7 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<IGameViewModel>().To<GameViewModel>().AsSingle();
         Container.Bind<IScoreViewModel>().To<ScoreViewModel>().AsSingle();
         Container.Bind<ICurrencyViewModel>().To<CurrencyViewModel>().AsSingle();
+        Container.Bind<ICoordsViewModel>().To<CoordsViewModel>().AsSingle();
     }
 
     private void BindModels()
@@ -47,6 +50,7 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<IGameModel>().To<GameModel>().AsSingle();
         Container.Bind<IScoreModel>().To<ScoreModel>().AsSingle();
         Container.Bind<ICurrencyModel>().To<CurrencyModel>().AsSingle();
+        Container.Bind<ICoordsModel>().To<CoordsModel>().AsSingle();
     }
 
     private void BindConfigs()

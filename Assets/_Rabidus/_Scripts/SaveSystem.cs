@@ -5,13 +5,14 @@ public static class SaveSystem
 {
     private static string SaveKey = "saveData";
 
-    public static void Save(ICurrencyModel currency, IScoreModel score, IGameModel game)
+    public static void Save(ICurrencyModel currency, IScoreModel score, IGameModel game, ICoordsModel coords)
     {
         var data = new SaveData
         {
             CurrencyData = new CurrencySaveData(currency),
             ScoreData = new ScoreSaveData(score),
-            GameData = new GameSaveData(game)
+            GameData = new GameSaveData(game),
+            CoordsDate = new CoordsSaveData(coords)
         };
 
         MirraSDK.Data.SetObject<SaveData>(SaveKey, data, important: true);
@@ -19,7 +20,7 @@ public static class SaveSystem
         Debug.Log($"[SaveSystem] Saved");
     }
 
-    public static bool TryLoad(ICurrencyModel currency, IScoreModel score, IGameModel game)
+    public static bool TryLoad(ICurrencyModel currency, IScoreModel score, IGameModel game, ICoordsModel coords)
     {
         if (!MirraSDK.Data.HasKey(SaveKey)) return false;
 
@@ -39,6 +40,11 @@ public static class SaveSystem
         if (data.GameData != null)
         {
             game.LoadData(data.GameData);
+        }
+
+        if (data.CoordsDate != null)
+        {
+            coords.LoadData(data.CoordsDate);
         }
 
         Debug.Log($"[SaveSystem] Loaded ");
