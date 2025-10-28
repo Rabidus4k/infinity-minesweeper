@@ -19,7 +19,6 @@ public class GameGridDrawerView : MonoBehaviour
     private IInputViewModel _inputViewModel;
     private IGameViewModel _gameViewModel;
     private IScoreViewModel _scoreViewModel;
-    private ISaveService _saveService;
 
     private UINotificationManager _notificationManager;
 
@@ -41,7 +40,6 @@ public class GameGridDrawerView : MonoBehaviour
         _inputViewModel.RMBCoords.OnChanged += HandleRightClick;
         _gameViewModel = gameViewModel;
         _scoreViewModel = scoreViewModel;
-        _saveService = saveService;
 
         _gridFactory = factory;
 
@@ -86,7 +84,6 @@ public class GameGridDrawerView : MonoBehaviour
 
             FlagTile(coords);
             UpdateGridInfo(coords);
-            _saveService.Save();
         }
         else
         {
@@ -135,8 +132,6 @@ public class GameGridDrawerView : MonoBehaviour
     private async UniTask HandleClickAsync(Vector3Int coords)
     {
         await HandleClick(coords, new List<Vector3Int>());
-
-        _saveService.Save();
     }
 
     private async UniTask HandleClick(Vector3Int coords, List<Vector3Int> clickBuffer, bool recurce = true)
@@ -191,13 +186,14 @@ public class GameGridDrawerView : MonoBehaviour
     {
         bool wasFlagged = _gameViewModel.Cells.Value[coords].IsFlagged;
 
-        _gameViewModel.Cells.Value[coords] = new CellInfo()
+        var cellInfo = new CellInfo()
         {
             Value = _gameViewModel.Cells.Value[coords].Value,
             IsOpened = _gameViewModel.Cells.Value[coords].IsOpened,
             IsFlagged = !wasFlagged,
         };
 
+        _gameViewModel.Cells.Value[coords] = cellInfo;
 
         if (_gameViewModel.Cells.Value[coords].IsFlagged)
         {
@@ -220,12 +216,15 @@ public class GameGridDrawerView : MonoBehaviour
     private void OpenTile(Vector3Int coords)
     {
         if (_gameViewModel.Cells.Value[coords].IsOpened) return;
-        _gameViewModel.Cells.Value[coords] = new CellInfo()
+        
+        var cellInfo = new CellInfo()
         {
             Value = _gameViewModel.Cells.Value[coords].Value,
             IsOpened = true,
             IsFlagged = _gameViewModel.Cells.Value[coords].IsFlagged,
         };
+
+        _gameViewModel.Cells.Value[coords] = cellInfo;
 
         if (_spawnedCell.ContainsKey(coords))
         {

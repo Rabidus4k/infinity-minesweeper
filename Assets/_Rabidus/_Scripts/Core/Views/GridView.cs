@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Dynamic;
 using UnityEngine;
 using VInspector;
 using Zenject;
@@ -19,13 +20,11 @@ public class GridView : MonoBehaviour
     private UIPanel _currentPanel;
 
     protected IGameViewModel _gameViewModel;
-    protected ISaveService _saveService;
 
     [Inject]
-    private void Construct(IGameViewModel gameViewModel, ISaveService saveService)
+    private void Construct(IGameViewModel gameViewModel)
     {
         _gameViewModel = gameViewModel;
-        _saveService = saveService;
     }
 
     public void Initialize(int maxValue)
@@ -116,13 +115,15 @@ public class GridView : MonoBehaviour
                     {
                         if (cell.Value.IsOpened && cell.Value.Value == -1)
                         {
-                            _gameViewModel.Cells.Value[cell.Key] = new CellInfo()
+                            var cellInfo = new CellInfo()
                             {
                                 Value = cell.Value.Value,
                                 IsFlagged = cell.Value.IsFlagged,
                                 IsOpened = cell.Value.IsOpened,
                                 Ignore = true
                             };
+
+                            _gameViewModel.Cells.Value.Add(cell.Key, cellInfo);
                         }
                     }
                     SetState(GridStates.None);
@@ -132,19 +133,19 @@ public class GridView : MonoBehaviour
                 {
                     foreach (var cell in _addedCells)
                     {
-                        _gameViewModel.Cells.Value[cell.Key] = new CellInfo()
+                        var cellInfo  = new CellInfo()
                         {
                             Value = cell.Value.Value,
                             IsFlagged = cell.Value.IsFlagged,
                             IsOpened = cell.Value.IsOpened,
                             Ignore = true
                         };
+
+                        _gameViewModel.Cells.Value[cell.Key] = cellInfo;
                     }
                     break;
                 }
         }
-
-        _saveService.Save();
     }
 
     private void ShowPanel(GridStates state)

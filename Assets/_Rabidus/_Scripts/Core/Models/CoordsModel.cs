@@ -17,7 +17,6 @@ public class CoordsModel : ICoordsModel
 
         foreach (var item in coordsInfo.CoordsInfo)
         {
-            if (CoordsInfo.Contains(item)) continue;
             CoordsInfo.Add(item);
         }
     }

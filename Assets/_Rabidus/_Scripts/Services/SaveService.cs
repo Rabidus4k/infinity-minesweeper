@@ -15,14 +15,32 @@ public class SaveService : ISaveService
         Load();
     }
 
-    public void Save()
+    public void SaveCurrency()
     {
-        SaveSystem.Save(_currency, _score, _game, _coords);
+        SaveSystem.Save(_currency);
     }
 
-    public bool Load()
+    public void SaveScore()
     {
-        return SaveSystem.TryLoad(_currency, _score, _game, _coords);
+        SaveSystem.Save(_score);
+    }
+
+    public void SaveGame()
+    {
+        SaveSystem.Save(_game);
+    }
+
+    public void SaveCoords()
+    {
+        SaveSystem.Save(_coords);
+    }
+
+    public void Load()
+    {
+        SaveSystem.TryLoad(_currency);
+        SaveSystem.TryLoad(_score);
+        SaveSystem.TryLoad(_game);
+        SaveSystem.TryLoad(_coords);
     }
 
     public void ResetSaves()
@@ -30,9 +48,14 @@ public class SaveService : ISaveService
         SaveSystem.ResetSaves();
     }
 }
+
 public interface ISaveService
 {
-    void Save();
-    bool Load();
+    void SaveCurrency();
+    void SaveScore();
+    void SaveGame();
+    void SaveCoords();
+
+    void Load();
     void ResetSaves();
 }

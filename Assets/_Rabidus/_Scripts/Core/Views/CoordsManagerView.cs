@@ -6,8 +6,9 @@ public class CoordsManagerView : MonoBehaviour
 {
     [SerializeField] private RectTransform _root;
 
+    private Camera _cam;
+
     private UICoordsButton.Factory _factory;
-    private IInputViewModel _inputViewModel;
     private ICoordsViewModel _coordsViewModel;
 
     [Inject]
@@ -19,13 +20,17 @@ public class CoordsManagerView : MonoBehaviour
     )
     {
         _coordsViewModel = coordsViewModel;
-        _inputViewModel = inputViewModel;
         _factory = factory;
 
         foreach(var item in _coordsViewModel.CoordsInfo.Value)
         {
             CoordsButtonSetup(item);
         }
+    }
+
+    private void Awake()
+    {
+        _cam = Camera.main;
     }
 
     private void CoordsButtonSetup(CoordsInfo coordsInfo)
@@ -45,22 +50,22 @@ public class CoordsManagerView : MonoBehaviour
     public void CreateButton()
     {
         CoordsInfo coordsInfo = new CoordsInfo();
-        coordsInfo.Name = "Location";
+        coordsInfo.Name = $"Location {_coordsViewModel.CoordsInfo.Value.Count}";
         coordsInfo.Coords = new Vector3Int
         (
-            _inputViewModel.Coords.Value.x,
-            _inputViewModel.Coords.Value.y,
-            0
+            Mathf.FloorToInt(_cam.transform.position.x),
+            Mathf.FloorToInt(_cam.transform.position.y),
+            -10
         );
 
         CoordsButtonSetup(coordsInfo);
 
-        _coordsViewModel.CoordsInfo.Value.Add(coordsInfo);
+        _coordsViewModel.AddCoordsInfo(coordsInfo);
     }
 
     public void DeleteButton(CoordsInfo coordsInfo)
     {
-        _coordsViewModel.CoordsInfo.Value.Remove(coordsInfo);
+        _coordsViewModel.RemoveCoordsInfo(coordsInfo);
 
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(_root);

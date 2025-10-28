@@ -3,57 +3,109 @@ using UnityEngine;
 
 public static class SaveSystem
 {
-    private static string SaveKey = "saveData";
+    private static string SaveKeyCurrency = "SaveKeyCurrency";
+    private static string SaveKeyScore = "SaveKeyScore";
+    private static string SaveKeyGame = "SaveKeyGame";
+    private static string SaveKeyCoords = "SaveKeyCoords";
 
-    public static void Save(ICurrencyModel currency, IScoreModel score, IGameModel game, ICoordsModel coords)
+    public static void Save(ICurrencyModel model)
     {
-        var data = new SaveData
-        {
-            CurrencyData = new CurrencySaveData(currency),
-            ScoreData = new ScoreSaveData(score),
-            GameData = new GameSaveData(game),
-            CoordsDate = new CoordsSaveData(coords)
-        };
-
-        MirraSDK.Data.SetObject<SaveData>(SaveKey, data, important: true);
-        
-        Debug.Log($"[SaveSystem] Saved");
+        CurrencySaveData data = new CurrencySaveData(model);
+        MirraSDK.Data.SetObject<CurrencySaveData>(SaveKeyCurrency, data, important: true);
+        Debug.Log($"[SaveSystem] Save: ICurrencyModel");
     }
 
-    public static bool TryLoad(ICurrencyModel currency, IScoreModel score, IGameModel game, ICoordsModel coords)
+    public static void Save(IScoreModel model)
     {
-        if (!MirraSDK.Data.HasKey(SaveKey)) return false;
+        ScoreSaveData data = new ScoreSaveData(model);
+        MirraSDK.Data.SetObject<ScoreSaveData>(SaveKeyScore, data, important: true);
+        Debug.Log($"[SaveSystem] Save: IScoreModel");
+    }
 
-        SaveData data = MirraSDK.Data.GetObject<SaveData>(SaveKey);
+    public static void Save(IGameModel model)
+    {
+        GameSaveData data = new GameSaveData(model);
+        MirraSDK.Data.SetObject<GameSaveData>(SaveKeyGame, data, important: true);
+        Debug.Log($"[SaveSystem] Save: IGameModel");
+    }
+
+    public static void Save(ICoordsModel model)
+    {
+        CoordsSaveData data = new CoordsSaveData(model);
+        MirraSDK.Data.SetObject<CoordsSaveData>(SaveKeyCoords, data, important: true);
+        Debug.Log($"[SaveSystem] Save: ICoordsModel");
+    }
+
+    public static bool TryLoad(ICurrencyModel model)
+    {
+        if (!MirraSDK.Data.HasKey(SaveKeyCurrency)) return false;
+
+        CurrencySaveData data = MirraSDK.Data.GetObject<CurrencySaveData>(SaveKeyCurrency);
         Debug.Log(JsonUtility.ToJson(data, prettyPrint: true));
 
-        if (data.CurrencyData != null)
+        if (data != null)
         {
-            currency.LoadData(data.CurrencyData);
+            model.LoadData(data);
         }
 
-        if (data.ScoreData != null)
+        Debug.Log($"[SaveSystem] Loaded: ICurrencyModel");
+
+        return true;
+    }
+
+    public static bool TryLoad(IScoreModel model)
+    {
+        if (!MirraSDK.Data.HasKey(SaveKeyScore)) return false;
+
+        ScoreSaveData data = MirraSDK.Data.GetObject<ScoreSaveData>(SaveKeyScore);
+        Debug.Log(JsonUtility.ToJson(data, prettyPrint: true));
+
+        if (data != null)
         {
-            score.LoadData(data.ScoreData);
+            model.LoadData(data);
         }
 
-        if (data.GameData != null)
+        Debug.Log($"[SaveSystem] Loaded: IScoreModel");
+
+        return true;
+    }
+
+    public static bool TryLoad(IGameModel model)
+    {
+        if (!MirraSDK.Data.HasKey(SaveKeyGame)) return false;
+
+        GameSaveData data = MirraSDK.Data.GetObject<GameSaveData>(SaveKeyGame);
+        Debug.Log(JsonUtility.ToJson(data, prettyPrint: true));
+
+        if (data != null)
         {
-            game.LoadData(data.GameData);
+            model.LoadData(data);
         }
 
-        if (data.CoordsDate != null)
+        Debug.Log($"[SaveSystem] Loaded: IGameModel");
+
+        return true;
+    }
+
+    public static bool TryLoad(ICoordsModel model)
+    {
+        if (!MirraSDK.Data.HasKey(SaveKeyCoords)) return false;
+
+        CoordsSaveData data = MirraSDK.Data.GetObject<CoordsSaveData>(SaveKeyCoords);
+        Debug.Log(JsonUtility.ToJson(data, prettyPrint: true));
+
+        if (data != null)
         {
-            coords.LoadData(data.CoordsDate);
+            model.LoadData(data);
         }
 
-        Debug.Log($"[SaveSystem] Loaded ");
+        Debug.Log($"[SaveSystem] Loaded: ICoordsModel");
 
         return true;
     }
 
     public static void ResetSaves()
     {
-        MirraSDK.Data.DeleteKey(SaveKey);
+        MirraSDK.Data.DeleteAll();
     }
 }

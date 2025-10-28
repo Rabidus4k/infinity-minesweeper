@@ -15,17 +15,14 @@ public class UICoordsButton : UICustomButton
 
     protected IInputViewModel _inputViewModel;
     private ICoordsViewModel _coordsViewModel;
-    private ISaveService _saveService;
 
     [Inject]
     private void Construct
     (
         IInputViewModel inputViewModel,
-        ICoordsViewModel coordsViewModel,
-        ISaveService saveService
+        ICoordsViewModel coordsViewModel
     )
     {
-        _saveService = saveService;
         _coordsViewModel = coordsViewModel;
         _inputViewModel = inputViewModel;
     }
@@ -69,8 +66,6 @@ public class UICoordsButton : UICustomButton
             _coordsInfo.Coords.y = y;
 
         _coordsInfo.Name = _nameText.text;
-
-        _saveService.Save();
     }
 
     private void RefreshInfo()

@@ -8,6 +8,7 @@ public class GameViewModel : IGameViewModel
     public ReactiveProperty<Dictionary<Vector3Int, CellInfo>> Cells { get; private set; } = new ReactiveProperty<Dictionary<Vector3Int, CellInfo>>();
 
     protected IGameModel _model;
+
     public GameViewModel(IGameModel model)
     {
         _model = model;
