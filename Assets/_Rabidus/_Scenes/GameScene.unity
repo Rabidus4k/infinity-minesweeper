@@ -10810,6 +10810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8282af78c4f464a8ad7b29ec08ef5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveControllerView
+  _saveInterval: 5
 --- !u!1001 &237477366
 PrefabInstance:
   m_ObjectHideFlags: 0
