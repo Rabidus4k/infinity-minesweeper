@@ -9,6 +9,8 @@ using Zenject;
 
 public class GameGridDrawerView : MonoBehaviour
 {
+    [SerializeField] private UIPanel _loadingPanel;
+
     [SerializeField] private LeanGameObjectPool _cellPool;
     [SerializeField] private SerializedDictionary<int, Sprite> _sprites = new SerializedDictionary<int, Sprite>();
     [SerializeField] private UINotificationInfo _notificationInfo;
@@ -27,6 +29,7 @@ public class GameGridDrawerView : MonoBehaviour
     private SoundManager _soundManager;
 
     private bool _canPlaceTile = true;
+    
 
     [Inject]
     private void Construct
@@ -94,6 +97,8 @@ public class GameGridDrawerView : MonoBehaviour
 
     private async UniTask PrepareGameField(CancellationToken token)
     {
+        _loadingPanel.ShowPanel();
+
         _canPlaceTile = false;
         await DrawChunkAsync(Vector3Int.zero, _gameViewModel.Cells.Value, token);
         await HandleClickAsync(_gameViewModel.Config.Value.OriginCell, token);
@@ -104,6 +109,10 @@ public class GameGridDrawerView : MonoBehaviour
         }
 
         _canPlaceTile = true;
+
+        await UniTask.WaitForSeconds(0.5f);
+
+        _loadingPanel.HidePanel();
     }
 
     private void HandleRightClick(Vector3Int coords)
