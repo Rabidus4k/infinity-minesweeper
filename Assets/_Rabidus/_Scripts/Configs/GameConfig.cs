@@ -4,6 +4,7 @@ using VInspector;
 [CreateAssetMenu(menuName = "Configs/Game Config")]
 public class GameConfig : ScriptableObject, IGameConfig
 {
+    [field: SerializeField] public Vector3Int OriginCell { get; private set; }
     [field: SerializeField] public SerializedDictionary<Vector3Int, CellInfo> StartCells { get; private set; } = new SerializedDictionary<Vector3Int, CellInfo>();
     [field: SerializeField] public int Size { get; private set; } = 8;
     [field: SerializeField] public int Seed { get; private set; } = 123;
@@ -12,6 +13,7 @@ public class GameConfig : ScriptableObject, IGameConfig
 
 public interface IGameConfig
 {
+    public Vector3Int OriginCell { get; }
     public SerializedDictionary<Vector3Int, CellInfo> StartCells { get; }
     public int Size { get; }
     public int Seed { get; }

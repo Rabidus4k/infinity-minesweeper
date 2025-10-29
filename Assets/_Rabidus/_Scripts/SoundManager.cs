@@ -9,6 +9,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _audioSourcePrefab;
     [SerializeField] private int _sameSoundMaxCount = 5;
 
+    private bool _canPlay = true;
+
     [field : SerializeField] public SerializedDictionary<string, Sound> DefaultSounds { get; private set; } = new SerializedDictionary<string, Sound>();
 
     [SerializeField] private Sound _debugSound;
@@ -29,6 +31,8 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(Sound sound)
     {
+        if (!_canPlay) return;
+
         if (_currentSounds.ContainsKey(sound) && _currentSounds[sound] > _sameSoundMaxCount)
             return;
 
@@ -58,6 +62,11 @@ public class SoundManager : MonoBehaviour
             _currentSounds.Remove(sound);
 
         LeanPool.Despawn(source);
+    }
+    
+    public void ToggleSound()
+    {
+        _canPlay = !_canPlay;
     }
 
     [Button]

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7736263f84f573e4cb431b159bc2a1d3, type: 3}
   m_Name: Game Config
   m_EditorClassIdentifier: Assembly-CSharp::GameConfig
+  <OriginCell>k__BackingField: {x: 3, y: 3, z: 0}
   <StartCells>k__BackingField:
     serializedKvps:
-    - Key: {x: -1, y: 1, z: 0}
+    - Key: {x: 3, y: 3, z: 0}
       Value:
         Value: 0
         IsOpened: 0
@@ -22,7 +23,7 @@ MonoBehaviour:
         Ignore: 0
       index: 0
       isKeyRepeated: 0
-    - Key: {x: -1, y: 0, z: 0}
+    - Key: {x: 3, y: 4, z: 0}
       Value:
         Value: 0
         IsOpened: 0
@@ -30,7 +31,7 @@ MonoBehaviour:
         Ignore: 0
       index: 1
       isKeyRepeated: 0
-    - Key: {x: -1, y: -1, z: 0}
+    - Key: {x: 4, y: 3, z: 0}
       Value:
         Value: 0
         IsOpened: 0
@@ -38,53 +39,13 @@ MonoBehaviour:
         Ignore: 0
       index: 2
       isKeyRepeated: 0
-    - Key: {x: 0, y: 1, z: 0}
+    - Key: {x: 4, y: 4, z: 0}
       Value:
         Value: 0
         IsOpened: 0
         IsFlagged: 0
         Ignore: 0
       index: 3
-      isKeyRepeated: 0
-    - Key: {x: 0, y: 0, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
-        IsFlagged: 0
-        Ignore: 0
-      index: 4
-      isKeyRepeated: 0
-    - Key: {x: 0, y: -1, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
-        IsFlagged: 0
-        Ignore: 0
-      index: 5
-      isKeyRepeated: 0
-    - Key: {x: 1, y: 1, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
-        IsFlagged: 0
-        Ignore: 0
-      index: 6
-      isKeyRepeated: 0
-    - Key: {x: 1, y: 0, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
-        IsFlagged: 0
-        Ignore: 0
-      index: 7
-      isKeyRepeated: 0
-    - Key: {x: 1, y: -1, z: 0}
-      Value:
-        Value: 0
-        IsOpened: 0
-        IsFlagged: 0
-        Ignore: 0
-      index: 8
       isKeyRepeated: 0
     dividerPos: 0.33
   <Size>k__BackingField: 8

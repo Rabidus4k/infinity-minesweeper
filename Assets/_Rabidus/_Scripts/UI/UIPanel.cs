@@ -8,7 +8,7 @@ public class UIPanel : MonoBehaviour
     [SerializeField] protected CanvasGroup _canvasGroup;
     [SerializeField] protected bool _hideOnAwake = false;
 
-    protected bool _isShown = false;
+    protected bool _isShown = true;
     public bool IsShown => _isShown;
 
 

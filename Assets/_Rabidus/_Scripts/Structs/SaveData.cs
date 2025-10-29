@@ -81,5 +81,5 @@ public class CellEntry
 public class CoordsInfo
 {
     public string Name;
-    public Vector3Int Coords;
+    public Vector3 Coords;
 }

@@ -10,6 +10,7 @@ public class SceneInstaller : MonoInstaller
     [SerializeField] private GridView _gridView;
     [SerializeField] private UICoordsButton _coordsButton;
     [SerializeField] private UINotificationManager _notificationManager;
+    [SerializeField] private UILeaderboardEntry _leaderboardEntry;
 
     [SerializeField] private SoundManager _soundManager;
 
@@ -36,6 +37,7 @@ public class SceneInstaller : MonoInstaller
     {
         Container.BindFactory<GridView, GridView.Factory>().FromComponentInNewPrefab(_gridView).UnderTransformGroup("Grids");
         Container.BindFactory<UICoordsButton, UICoordsButton.Factory>().FromComponentInNewPrefab(_coordsButton);
+        Container.BindFactory<UILeaderboardEntry, UILeaderboardEntry.Factory>().FromComponentInNewPrefab(_leaderboardEntry);
     }
 
     private void BindViewModels()

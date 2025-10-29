@@ -1,4 +1,5 @@
-﻿using MirraGames.SDK;
+﻿using Cysharp.Threading.Tasks;
+using MirraGames.SDK;
 using UnityEngine;
 using Zenject;
 
@@ -16,7 +17,7 @@ public class SaveControllerView : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(SaveProgress), _saveInterval, _saveInterval);
+        SaveProgressAsync().Forget();
     }
 
     private void OnEnable()
@@ -50,6 +51,15 @@ public class SaveControllerView : MonoBehaviour
         _saveService.SaveScore();
         _saveService.SaveGame();
         _saveService.SaveCoords();
+    }
+
+    private async UniTask SaveProgressAsync()
+    {
+        while (true)
+        {
+            await UniTask.WaitForSeconds(_saveInterval);
+            SaveProgress();
+        }
     }
 
     public void ResetProgress()

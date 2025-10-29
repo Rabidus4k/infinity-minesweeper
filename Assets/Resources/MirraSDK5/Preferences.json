@@ -53,6 +53,14 @@
                     {
                         "key": "IData.Visible",
                         "value": true
+                    },
+                    {
+                        "key": "IAnalytics.Visible",
+                        "value": false
+                    },
+                    {
+                        "key": "IAchievements.Visible",
+                        "value": true
                     }
                 ],
                 "intCollection": [],
@@ -70,15 +78,15 @@
                     },
                     {
                         "key": "CrazyGames_PropertyGroup.Visible",
-                        "value": true
+                        "value": false
                     },
                     {
                         "key": "Lagged_PropertyGroup.Visible",
-                        "value": true
+                        "value": false
                     },
                     {
                         "key": "Y8_PropertyGroup.Visible",
-                        "value": true
+                        "value": false
                     },
                     {
                         "key": "Logger_PropertyGroup.Visible",
@@ -95,6 +103,14 @@
                     {
                         "key": "IPlayer.Visible",
                         "value": true
+                    },
+                    {
+                        "key": "IAchievements.Visible",
+                        "value": true
+                    },
+                    {
+                        "key": "IAchievements.Override",
+                        "value": false
                     }
                 ],
                 "intCollection": [],

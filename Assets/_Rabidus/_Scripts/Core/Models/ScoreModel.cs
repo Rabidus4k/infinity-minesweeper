@@ -12,6 +12,11 @@ public class ScoreModel : IScoreModel
     {
         MaxScore = ((ScoreSaveData)data).MaxScore;
     }
+
+    public void SetMaxScore(int maxScore)
+    {
+        MaxScore = maxScore;
+    }
 }
 
 public interface IScoreModel: ILoadable
@@ -19,4 +24,5 @@ public interface IScoreModel: ILoadable
     public int Score { get; }
     public int MaxScore { get; }
     public void AddScore(int score);
+    public void SetMaxScore(int maxScore);
 }

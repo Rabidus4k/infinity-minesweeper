@@ -5,8 +5,7 @@ using Zenject;
 
 public class UICoordsButton : UICustomButton
 {
-    [SerializeField] private TMPro.TMP_InputField _xText;
-    [SerializeField] private TMPro.TMP_InputField _yText;
+    [SerializeField] private TMPro.TextMeshProUGUI _coordsText;
     [SerializeField] private TMPro.TMP_InputField _nameText;
 
     [SerializeField] private CoordsInfo _coordsInfo;
@@ -40,8 +39,6 @@ public class UICoordsButton : UICustomButton
         base.OnEnable();
 
         _nameText.onValueChanged.AddListener(OnValueChanged);
-        _xText.onValueChanged.AddListener(OnValueChanged);
-        _yText.onValueChanged.AddListener(OnValueChanged);
     }
 
     protected override void OnDisable()
@@ -49,8 +46,6 @@ public class UICoordsButton : UICustomButton
         base.OnDisable();
 
         _nameText.onValueChanged.RemoveListener(OnValueChanged);
-        _xText.onValueChanged.RemoveListener(OnValueChanged);
-        _yText.onValueChanged.RemoveListener(OnValueChanged);
     }
 
     protected override void HandleClick()
@@ -60,19 +55,13 @@ public class UICoordsButton : UICustomButton
 
     private void OnValueChanged(string _)
     {
-        if (int.TryParse(_xText.text, out int x))
-            _coordsInfo.Coords.x = Mathf.Clamp(x, -100000, 100000);
-        if (int.TryParse(_yText.text, out int y))
-            _coordsInfo.Coords.y = Mathf.Clamp(y, -100000, 100000);
-
         _coordsInfo.Name = _nameText.text;
     }
 
     private void RefreshInfo()
     {
         _nameText.text = _coordsInfo.Name;
-        _xText.text = _coordsInfo.Coords.x.ToString();
-        _yText.text = _coordsInfo.Coords.y.ToString();
+        _coordsText.text = $"X:{_coordsInfo.Coords.x} Y:{_coordsInfo.Coords.y}";
     }
 
     public void DeleteButton()

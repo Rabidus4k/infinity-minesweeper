@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Zoom Config
   m_EditorClassIdentifier: Assembly-CSharp::ZoomConfig
   <MinZoom>k__BackingField: 4
-  <MaxZoom>k__BackingField: 30
+  <MaxZoom>k__BackingField: 100
   <ZoomStep>k__BackingField: 1
   <SmoothZoom>k__BackingField: 1
   <ZoomLerpSpeed>k__BackingField: 20

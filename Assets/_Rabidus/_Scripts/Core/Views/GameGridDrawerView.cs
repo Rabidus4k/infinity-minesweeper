@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
 using Lean.Pool;
 using System.Collections.Generic;
+using System.Threading;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using VInspector;
 using Zenject;
@@ -10,6 +12,7 @@ public class GameGridDrawerView : MonoBehaviour
     [SerializeField] private LeanGameObjectPool _cellPool;
     [SerializeField] private SerializedDictionary<int, Sprite> _sprites = new SerializedDictionary<int, Sprite>();
     [SerializeField] private UINotificationInfo _notificationInfo;
+    [SerializeField] private int _drawCellsPerFrame = 8;
 
     private Dictionary<Vector3Int, CellView> _spawnedCell = new Dictionary<Vector3Int, CellView>();
     private Dictionary<Vector3Int, GridView> _gridViews = new Dictionary<Vector3Int, GridView>();
@@ -22,6 +25,9 @@ public class GameGridDrawerView : MonoBehaviour
 
     private UINotificationManager _notificationManager;
     private SoundManager _soundManager;
+
+    private bool _canPlaceTile = true;
+
     [Inject]
     private void Construct
         (
@@ -51,34 +57,63 @@ public class GameGridDrawerView : MonoBehaviour
         Debug.Log($"Seed: {Random.state}");
     }
 
-    private void Start()
+    private CancellationTokenSource _cts;
+
+    private void OnEnable()
     {
-        PrepareGameField().Forget();
+        _cts = new CancellationTokenSource();
     }
 
-    private async UniTask PrepareGameField()
+    private void OnDisable()
     {
-        await DrawChunkAsync(Vector3Int.zero, _gameViewModel.Cells.Value);
-        await HandleClickAsync(Vector3Int.zero);
+        _inputViewModel.LMBCoords.OnChanged -= HandleLeftClick;
+        _inputViewModel.RMBCoords.OnChanged -= HandleRightClick;
+
+        CancelAndDispose();
+    }
+
+    private void OnDestroy()
+    {
+        CancelAndDispose();
+    }
+
+    private void CancelAndDispose()
+    {
+        if (_cts != null)
+        {
+            _cts.Cancel();
+            _cts.Dispose();
+            _cts = null;
+        }
+    }
+
+    private void Start()
+    {
+        PrepareGameField(_cts.Token).Forget();
+    }
+
+    private async UniTask PrepareGameField(CancellationToken token)
+    {
+        _canPlaceTile = false;
+        await DrawChunkAsync(Vector3Int.zero, _gameViewModel.Cells.Value, token);
+        await HandleClickAsync(_gameViewModel.Config.Value.OriginCell, token);
 
         foreach (var item in _gameViewModel.Cells.Value)
         {
             UpdateGridInfo(item.Key);
         }
-    }
 
-    protected void OnDisable()
-    {
-        _inputViewModel.LMBCoords.OnChanged -= HandleLeftClick;
-        _inputViewModel.RMBCoords.OnChanged -= HandleRightClick;
+        _canPlaceTile = true;
     }
 
     private void HandleRightClick(Vector3Int coords)
     {
-        HandleRightClickAsync(coords).Forget();
+        if (!_canPlaceTile) return;
+
+        HandleRightClickAsync(coords, _cts.Token).Forget();
     }
 
-    private async UniTask HandleRightClickAsync(Vector3Int coords)
+    private async UniTask HandleRightClickAsync(Vector3Int coords, CancellationToken token)
     {
         if (_gameViewModel.Cells.Value.ContainsKey(coords))
         {
@@ -98,7 +133,7 @@ public class GameGridDrawerView : MonoBehaviour
                 _gameViewModel.Cells.Value.Add(cell.Key, cell.Value);
             }
 
-            await DrawChunkAsync(origin, chunk);
+            await DrawChunkAsync(origin, chunk, token);
 
             HandleRightClick(coords);
         }
@@ -106,9 +141,11 @@ public class GameGridDrawerView : MonoBehaviour
 
     private void HandleLeftClick(Vector3Int coords)
     {
+        if (!_canPlaceTile) return;
+
         if (CheckNeighbours(coords))
         {
-            HandleClickAsync(coords).Forget();
+            HandleClickAsync(coords, _cts.Token).Forget();
         }
         else
             _notificationManager.SendNotification(_notificationInfo);
@@ -131,12 +168,12 @@ public class GameGridDrawerView : MonoBehaviour
         _gridViews[origin].RefreshCell(coords);
     }
 
-    private async UniTask HandleClickAsync(Vector3Int coords)
+    private async UniTask HandleClickAsync(Vector3Int coords, CancellationToken token)
     {
-        await HandleClick(coords, new List<Vector3Int>());
+        await HandleClick(coords, new List<Vector3Int>(), token);
     }
 
-    private async UniTask HandleClick(Vector3Int coords, List<Vector3Int> clickBuffer, bool recurce = true)
+    private async UniTask HandleClick(Vector3Int coords, List<Vector3Int> clickBuffer, CancellationToken token, bool recurce = true)
     {
         if (clickBuffer != null)
         {
@@ -150,16 +187,16 @@ public class GameGridDrawerView : MonoBehaviour
 
             if (_gameViewModel.Cells.Value[coords].IsOpened && _gameViewModel.Cells.Value[coords].Value != 0 && CheckFlagsAround(coords))
             {
-                await UniTask.WaitForSeconds(0.01f);
+                await UniTask.WaitForSeconds(0.01f, cancellationToken: token);
                 
                 if (recurce)
-                    await OpenTileAround(coords, clickBuffer, false);
+                    await OpenTileAround(coords, clickBuffer, token, false);
             }
             else if (_gameViewModel.Cells.Value[coords].Value == 0 && _gameViewModel.Cells.Value[coords].IsOpened == false)
             {
                 OpenTile(coords);
 
-                await OpenTileAround(coords, clickBuffer);
+                await OpenTileAround(coords, clickBuffer, token);
             }
             else
             {
@@ -177,8 +214,8 @@ public class GameGridDrawerView : MonoBehaviour
                 _gameViewModel.Cells.Value.Add(cell.Key, cell.Value);
             }
 
-            await DrawChunkAsync(origin, chunk);
-            await HandleClick(coords, new List<Vector3Int>());
+            await DrawChunkAsync(origin, chunk, token);
+            await HandleClick(coords, new List<Vector3Int>(), token);
         }
 
         UpdateGridInfo(coords);
@@ -282,21 +319,22 @@ public class GameGridDrawerView : MonoBehaviour
         return false;
     }
 
-    private async UniTask OpenTileAround(Vector3Int coords, List<Vector3Int> clickBuffer, bool recurce = true)
+    private async UniTask OpenTileAround(Vector3Int coords, List<Vector3Int> clickBuffer, CancellationToken token, bool recurce = true)
     {
-        await HandleClick(new Vector3Int(coords.x - 1, coords.y), clickBuffer, recurce);
-        await HandleClick(new Vector3Int(coords.x + 1, coords.y), clickBuffer, recurce);
-        await HandleClick(new Vector3Int(coords.x, coords.y - 1), clickBuffer, recurce);
-        await HandleClick(new Vector3Int(coords.x, coords.y + 1), clickBuffer, recurce);
+        await HandleClick(new Vector3Int(coords.x - 1, coords.y), clickBuffer, token, recurce);
+        await HandleClick(new Vector3Int(coords.x + 1, coords.y), clickBuffer, token, recurce);
+        await HandleClick(new Vector3Int(coords.x, coords.y - 1), clickBuffer, token, recurce);
+        await HandleClick(new Vector3Int(coords.x, coords.y + 1), clickBuffer, token, recurce);
 
-        await HandleClick(new Vector3Int(coords.x - 1, coords.y + 1), clickBuffer, recurce);
-        await HandleClick(new Vector3Int(coords.x - 1, coords.y - 1), clickBuffer, recurce);
-        await HandleClick(new Vector3Int(coords.x + 1, coords.y + 1), clickBuffer, recurce);
-        await HandleClick(new Vector3Int(coords.x + 1, coords.y - 1), clickBuffer, recurce);
+        await HandleClick(new Vector3Int(coords.x - 1, coords.y + 1), clickBuffer, token, recurce);
+        await HandleClick(new Vector3Int(coords.x - 1, coords.y - 1), clickBuffer, token, recurce);
+        await HandleClick(new Vector3Int(coords.x + 1, coords.y + 1), clickBuffer, token, recurce);
+        await HandleClick(new Vector3Int(coords.x + 1, coords.y - 1), clickBuffer, token, recurce);
     }
 
-    public async UniTask DrawChunkAsync(Vector3Int origin, Dictionary<Vector3Int, CellInfo> chunk)
+    public async UniTask DrawChunkAsync(Vector3Int origin, Dictionary<Vector3Int, CellInfo> chunk, CancellationToken token)
     {
+        int counter = 0;
         GameObject chunkOn = new GameObject("Chunk");
         var parent = chunkOn.transform;
 
@@ -324,6 +362,13 @@ public class GameGridDrawerView : MonoBehaviour
                 }
             }
 
+            counter++;
+
+            if (counter >= _drawCellsPerFrame)
+            {
+                counter = 0;
+                await UniTask.WaitForEndOfFrame(token);
+            }
         }
 
     }
