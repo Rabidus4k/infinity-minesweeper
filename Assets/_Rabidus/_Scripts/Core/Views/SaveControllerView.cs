@@ -20,17 +20,17 @@ public class SaveControllerView : MonoBehaviour
         SaveProgressAsync().Forget();
     }
 
-    private void OnEnable()
-    {
-        Application.focusChanged += OnFocusChanged;
-        Application.quitting += OnAppQuit;
-    }
+    //private void OnEnable()
+    //{
+    //    Application.focusChanged += OnFocusChanged;
+    //    Application.quitting += OnAppQuit;
+    //}
 
-    private void OnDisable()
-    {
-        Application.focusChanged -= OnFocusChanged;
-        Application.quitting -= OnAppQuit;
-    }
+    //private void OnDisable()
+    //{
+    //    Application.focusChanged -= OnFocusChanged;
+    //    Application.quitting -= OnAppQuit;
+    //}
 
     private void OnFocusChanged(bool hasFocus)
     {

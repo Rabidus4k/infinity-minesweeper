@@ -1,5 +1,6 @@
 using MirraGames.SDK;
 using MirraGames.SDK.Common;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,10 +35,24 @@ public class LeaderboardView : MonoBehaviour
         _scoreViewModel.MaxScore.OnChanged -= MaxScoreChanged;
     }
 
+    private int _currentMaxScore = 0;
+    private Coroutine _coroutine;
+
     private void MaxScoreChanged(int value)
     {
         Debug.Log($"MAX SCORE: {value}");
-        MirraSDK.Achievements.SetScore(LeaderboardId, value);
+        _currentMaxScore = value;
+
+        if (_coroutine != null) return;
+
+        _coroutine = StartCoroutine(AddToLeaderboardCoroutine());
+    }
+
+    private IEnumerator AddToLeaderboardCoroutine()
+    {
+        yield return new WaitForSeconds(1.2f);
+        MirraSDK.Achievements.SetScore(LeaderboardId, _currentMaxScore);
+        _coroutine = null;
     }
 
     private void LoadLearboard()
