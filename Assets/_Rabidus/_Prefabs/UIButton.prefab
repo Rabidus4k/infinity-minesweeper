@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7130489368399637476}
   - component: {fileID: 6226457034780754661}
   - component: {fileID: 2671099708617383952}
+  - component: {fileID: 7192209671589558890}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -91,6 +92,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 5, y: -5}
   m_UseGraphicAlpha: 1
+--- !u!114 &7192209671589558890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395380025995860382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d4ce6414dd93646b88dab0974fdf25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIImageThemeSetter
+  _index: 2
 --- !u!1 &2390861382918929491
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,6 +116,7 @@ GameObject:
   - component: {fileID: 1655325095026203546}
   - component: {fileID: 392651929841268800}
   - component: {fileID: 6849244043080775707}
+  - component: {fileID: 1431400915061275101}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -227,6 +242,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1431400915061275101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2390861382918929491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15cbedf2f3d0ff4dbf12b1d648a28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITextThemeSetter
+  _index: 2
 --- !u!1 &8914506270453608853
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,6 +269,7 @@ GameObject:
   - component: {fileID: 6673233110128594143}
   - component: {fileID: 3503481942363657312}
   - component: {fileID: 1658937014650977703}
+  - component: {fileID: 7875638727930346064}
   m_Layer: 5
   m_Name: UIButton
   m_TagString: Untagged
@@ -380,3 +409,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
   _button: {fileID: 0}
   _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
+--- !u!114 &7875638727930346064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914506270453608853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d4ce6414dd93646b88dab0974fdf25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIImageThemeSetter
+  _index: 0

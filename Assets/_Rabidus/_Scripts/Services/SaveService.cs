@@ -4,13 +4,22 @@ public class SaveService : ISaveService
     private readonly IScoreModel _score;
     private readonly IGameModel _game;
     private readonly ICoordsModel _coords;
+    private readonly IAppearenceModel _appearence;
 
-    public SaveService(ICurrencyModel currency, IScoreModel score, IGameModel game, ICoordsModel coords)
+    public SaveService
+    (
+        ICurrencyModel currency,
+        IScoreModel score,
+        IGameModel game,
+        ICoordsModel coords,
+        IAppearenceModel appearence
+    )
     {
         _currency = currency;
         _score = score;
         _game = game;
         _coords = coords;
+        _appearence = appearence;
 
         Load();
     }
@@ -35,12 +44,18 @@ public class SaveService : ISaveService
         SaveSystem.Save(_coords);
     }
 
+    public void SaveAppearence()
+    {
+        SaveSystem.Save(_appearence);
+    }
+
     public void Load()
     {
         SaveSystem.TryLoad(_currency);
         SaveSystem.TryLoad(_score);
         SaveSystem.TryLoad(_game);
         SaveSystem.TryLoad(_coords);
+        SaveSystem.TryLoad(_appearence);
     }
 
     public void ResetSaves()
@@ -55,6 +70,7 @@ public interface ISaveService
     void SaveScore();
     void SaveGame();
     void SaveCoords();
+    void SaveAppearence();
 
     void Load();
     void ResetSaves();

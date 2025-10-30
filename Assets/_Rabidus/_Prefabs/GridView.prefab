@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7608489427766787610}
   - component: {fileID: 1112451168468114421}
   - component: {fileID: 5263865393545600250}
+  - component: {fileID: 5869487262759902151}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -136,6 +137,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5869487262759902151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947504173956911523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15cbedf2f3d0ff4dbf12b1d648a28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITextThemeSetter
+  _index: 0
 --- !u!1 &2206347860313914724
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +653,7 @@ GameObject:
   - component: {fileID: 4200333958366789997}
   - component: {fileID: 6428635992707820647}
   - component: {fileID: 1237469160765905156}
+  - component: {fileID: 8731957444196006921}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -764,6 +779,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8731957444196006921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5039897330418472769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15cbedf2f3d0ff4dbf12b1d648a28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITextThemeSetter
+  _index: 0
 --- !u!1 &5144900523260911695
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,6 +806,7 @@ GameObject:
   - component: {fileID: 2508393295295210332}
   - component: {fileID: 6275172164621915052}
   - component: {fileID: 7116346459897002727}
+  - component: {fileID: 4130776159949865462}
   m_Layer: 5
   m_Name: Button-Claim
   m_TagString: Untagged
@@ -940,6 +969,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
   _button: {fileID: 0}
   _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
+--- !u!114 &4130776159949865462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5144900523260911695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d4ce6414dd93646b88dab0974fdf25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIImageThemeSetter
+  _index: 2
 --- !u!1 &5316194751942630575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,6 +1196,7 @@ GameObject:
   - component: {fileID: 8619411906870460805}
   - component: {fileID: 3856831798532635679}
   - component: {fileID: 5564483330324167736}
+  - component: {fileID: 3884533704105372904}
   m_Layer: 5
   m_Name: Button-Claim Ads
   m_TagString: Untagged
@@ -1333,6 +1376,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
   _button: {fileID: 0}
   _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
+--- !u!114 &3884533704105372904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5942456585540847162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d4ce6414dd93646b88dab0974fdf25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIImageThemeSetter
+  _index: 2
 --- !u!1 &6032749305088579040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,6 +1541,7 @@ GameObject:
   - component: {fileID: 6124634987456399992}
   - component: {fileID: 7437649772928787979}
   - component: {fileID: 5432641321650215457}
+  - component: {fileID: 1672485152450165689}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1610,6 +1667,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1672485152450165689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6876934749918993863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15cbedf2f3d0ff4dbf12b1d648a28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITextThemeSetter
+  _index: 0
 --- !u!1 &7047445507475946135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,6 +1695,7 @@ GameObject:
   - component: {fileID: 6495178812987196679}
   - component: {fileID: 3189815700904571505}
   - component: {fileID: 906606689354102893}
+  - component: {fileID: 1003539058969323865}
   m_Layer: 5
   m_Name: Button-Claim Ads
   m_TagString: Untagged
@@ -1792,6 +1863,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
   _button: {fileID: 0}
   _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
+--- !u!114 &1003539058969323865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047445507475946135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d4ce6414dd93646b88dab0974fdf25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIImageThemeSetter
+  _index: 2
 --- !u!1 &8329813618008989397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1887,7 @@ GameObject:
   - component: {fileID: 8241517364253465591}
   - component: {fileID: 2495339841942637930}
   - component: {fileID: 328271090479867540}
+  - component: {fileID: 4774781857046809122}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1928,6 +2013,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4774781857046809122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329813618008989397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15cbedf2f3d0ff4dbf12b1d648a28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITextThemeSetter
+  _index: 0
 --- !u!1 &8593882195083790058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,6 +2040,7 @@ GameObject:
   - component: {fileID: 1791492094660459126}
   - component: {fileID: 2764308595536091172}
   - component: {fileID: 1586655649100999949}
+  - component: {fileID: 8043118094370738560}
   m_Layer: 5
   m_Name: Button-Claim
   m_TagString: Untagged
@@ -2092,6 +2191,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UISoundEmmiterButton
   _button: {fileID: 0}
   _sound: {fileID: 11400000, guid: 5d25b0dd714f4454a8b0dc2863aecf57, type: 2}
+--- !u!114 &8043118094370738560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593882195083790058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d4ce6414dd93646b88dab0974fdf25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIImageThemeSetter
+  _index: 2
 --- !u!1 &8607094294039804060
 GameObject:
   m_ObjectHideFlags: 0

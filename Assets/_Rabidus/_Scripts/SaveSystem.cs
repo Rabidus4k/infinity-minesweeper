@@ -7,6 +7,7 @@ public static class SaveSystem
     private static string SaveKeyScore = "SaveKeyScore";
     private static string SaveKeyGame = "SaveKeyGame";
     private static string SaveKeyCoords = "SaveKeyCoords";
+    private static string SaveKeyAppearence = "SaveKeyAppearence";
 
     public static void Save(ICurrencyModel model)
     {
@@ -34,6 +35,13 @@ public static class SaveSystem
         CoordsSaveData data = new CoordsSaveData(model);
         MirraSDK.Data.SetObject<CoordsSaveData>(SaveKeyCoords, data, important: true);
         Debug.Log($"[SaveSystem] Save: ICoordsModel");
+    }
+
+    public static void Save(IAppearenceModel model)
+    {
+        AppearenceSaveData data = new AppearenceSaveData(model);
+        MirraSDK.Data.SetObject<AppearenceSaveData>(SaveKeyAppearence, data, important: true);
+        Debug.Log($"[SaveSystem] Save: IAppearenceModel");
     }
 
     public static bool TryLoad(ICurrencyModel model)
@@ -100,6 +108,23 @@ public static class SaveSystem
         }
 
         Debug.Log($"[SaveSystem] Loaded: ICoordsModel");
+
+        return true;
+    }
+
+    public static bool TryLoad(IAppearenceModel model)
+    {
+        if (!MirraSDK.Data.HasKey(SaveKeyAppearence)) return false;
+
+        AppearenceSaveData data = MirraSDK.Data.GetObject<AppearenceSaveData>(SaveKeyAppearence);
+        Debug.Log(JsonUtility.ToJson(data, prettyPrint: true));
+
+        if (data != null)
+        {
+            model.LoadData(data);
+        }
+
+        Debug.Log($"[SaveSystem] Loaded: IAppearenceModel");
 
         return true;
     }

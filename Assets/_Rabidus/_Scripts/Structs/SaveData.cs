@@ -71,6 +71,19 @@ public class GameSaveData
 }
 
 [Serializable]
+public class AppearenceSaveData
+{
+    public ThemeConfig ThemeConfig;
+
+    public AppearenceSaveData() { }
+
+    public AppearenceSaveData(IAppearenceModel model)
+    {
+        ThemeConfig = model.ThemeConfig;
+    }
+}
+
+[Serializable]
 public class CellEntry
 {
     public Vector3Int Key;

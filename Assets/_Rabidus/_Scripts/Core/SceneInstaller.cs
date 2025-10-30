@@ -6,6 +6,7 @@ public class SceneInstaller : MonoInstaller
 {
     [SerializeField] private ZoomConfig _zoomConfig;
     [SerializeField] private GameConfig _gameConfig;
+    [SerializeField] private ThemeConfig _defaultThemeConfig;
 
     [SerializeField] private GridView _gridView;
     [SerializeField] private UICoordsButton _coordsButton;
@@ -47,6 +48,7 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<IScoreViewModel>().To<ScoreViewModel>().AsSingle();
         Container.Bind<ICurrencyViewModel>().To<CurrencyViewModel>().AsSingle();
         Container.Bind<ICoordsViewModel>().To<CoordsViewModel>().AsSingle();
+        Container.Bind<IAppearenceViewModel>().To<AppearenceViewModel>().AsSingle();
     }
 
     private void BindModels()
@@ -56,11 +58,13 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<IScoreModel>().To<ScoreModel>().AsSingle();
         Container.Bind<ICurrencyModel>().To<CurrencyModel>().AsSingle();
         Container.Bind<ICoordsModel>().To<CoordsModel>().AsSingle();
+        Container.Bind<IAppearenceModel>().To<AppearenceModel>().AsSingle();
     }
 
     private void BindConfigs()
     {
         Container.Bind<IZoomConfig>().FromInstance(_zoomConfig).AsSingle();
         Container.Bind<IGameConfig>().FromInstance(_gameConfig).AsSingle();
+        Container.Bind<ThemeConfig>().FromInstance(_defaultThemeConfig).AsSingle();
     }
 }
