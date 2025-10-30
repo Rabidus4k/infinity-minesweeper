@@ -18,7 +18,7 @@ public class AppearenceViewModel : IAppearenceViewModel
         _model.ChangeTheme(theme);
         ThemeConfig.Value = theme;
 
-        _saveService.SaveAppearence();
+        //_saveService.SaveAppearence();
     }
 }
 

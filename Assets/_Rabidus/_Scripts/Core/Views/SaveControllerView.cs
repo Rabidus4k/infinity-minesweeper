@@ -15,8 +15,9 @@ public class SaveControllerView : MonoBehaviour
         _saveService = saveService;
     }
 
-    private void Start()
+    private async void Start()
     {
+        await _saveService.Load();
         SaveProgressAsync().Forget();
     }
 

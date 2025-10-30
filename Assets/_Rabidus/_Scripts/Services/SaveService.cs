@@ -1,3 +1,7 @@
+using Cysharp.Threading.Tasks;
+using Unity.Services.Authentication;
+using Unity.Services.Core;
+
 public class SaveService : ISaveService
 {
     private readonly ICurrencyModel _currency;
@@ -6,6 +10,8 @@ public class SaveService : ISaveService
     private readonly ICoordsModel _coords;
     private readonly IAppearenceModel _appearence;
     private readonly ISoundModel _sound;
+
+    public ReactiveProperty<bool> IsLoaded { get; private set; } = new ReactiveProperty<bool>();
 
     public SaveService
     (
@@ -23,8 +29,6 @@ public class SaveService : ISaveService
         _coords = coords;
         _appearence = appearence;
         _sound = sound;
-
-        Load();
     }
 
     public void SaveCurrency()
@@ -57,30 +61,33 @@ public class SaveService : ISaveService
         SaveSystem.Save(_sound);
     }
 
-    public void Load()
+    public async UniTask Load()
     {
-        SaveSystem.TryLoad(_currency);
-        SaveSystem.TryLoad(_score);
-        SaveSystem.TryLoad(_game);
-        SaveSystem.TryLoad(_coords);
-        SaveSystem.TryLoad(_appearence);
-        SaveSystem.TryLoad(_sound);
+        await SaveSystem.TryLoad(_currency);
+        await SaveSystem.TryLoad(_score);
+        await SaveSystem.TryLoad(_game);
+        await SaveSystem.TryLoad(_coords);
+        await SaveSystem.TryLoad(_appearence);
+        await SaveSystem.TryLoad(_sound);
+
+        IsLoaded.Value = true;
     }
 
     public void ResetSaves()
     {
-        SaveSystem.ResetSaves();
+        SaveSystem.ResetSaves().Forget();
     }
 }
 
 public interface ISaveService
 {
+    public ReactiveProperty<bool> IsLoaded { get; }
     void SaveCurrency();
     void SaveScore();
     void SaveGame();
     void SaveCoords();
     void SaveAppearence();
     void SaveSound();
-    void Load();
+    UniTask Load();
     void ResetSaves();
 }

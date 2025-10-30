@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using Lean.Pool;
 using System.Collections.Generic;
 using System.Threading;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using VInspector;
 using Zenject;
@@ -27,6 +26,7 @@ public class GameGridDrawerView : MonoBehaviour
 
     private UINotificationManager _notificationManager;
     private SoundManager _soundManager;
+    private ISaveService _saveService;
 
     private bool _canPlaceTile = true;
     
@@ -43,6 +43,7 @@ public class GameGridDrawerView : MonoBehaviour
             SoundManager soundManager
         )
     {
+        _saveService = saveService;
         _soundManager = soundManager;
         _notificationManager = uINotificationManager;
 
@@ -58,6 +59,8 @@ public class GameGridDrawerView : MonoBehaviour
             Random.InitState(_gameViewModel.Config.Value.Seed);
 
         Debug.Log($"Seed: {Random.state}");
+
+        _saveService.IsLoaded.OnChanged += (bool value) => PrepareGameField(_cts.Token).Forget();
     }
 
     private CancellationTokenSource _cts;
@@ -71,6 +74,8 @@ public class GameGridDrawerView : MonoBehaviour
     {
         _inputViewModel.LMBCoords.OnChanged -= HandleLeftClick;
         _inputViewModel.RMBCoords.OnChanged -= HandleRightClick;
+
+        _saveService.IsLoaded.OnChanged -= (bool value) => PrepareGameField(_cts.Token).Forget();
 
         CancelAndDispose();
     }
@@ -88,11 +93,6 @@ public class GameGridDrawerView : MonoBehaviour
             _cts.Dispose();
             _cts = null;
         }
-    }
-
-    private void Start()
-    {
-        PrepareGameField(_cts.Token).Forget();
     }
 
     private async UniTask PrepareGameField(CancellationToken token)
