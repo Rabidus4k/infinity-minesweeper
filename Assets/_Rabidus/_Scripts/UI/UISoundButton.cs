@@ -3,15 +3,16 @@ using Zenject;
 
 public class UISoundButton : UICustomButton
 {
-    private SoundManager _soundManager;
+    private ISoundViewModel _viewModel;
+
     [Inject]
-    private void Construct(SoundManager soundManager)
+    private void Construct(ISoundViewModel viewModel)
     {
-        _soundManager = soundManager;
+        _viewModel = viewModel;
     }
 
     protected override void HandleClick()
     {
-        _soundManager.ToggleSound();
+        _viewModel.ToggleSound();
     }
 }

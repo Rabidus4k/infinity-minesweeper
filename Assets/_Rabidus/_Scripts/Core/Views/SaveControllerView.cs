@@ -51,7 +51,6 @@ public class SaveControllerView : MonoBehaviour
         _saveService.SaveScore();
         _saveService.SaveGame();
         _saveService.SaveCoords();
-        _saveService.SaveAppearence();
     }
 
     private async UniTask SaveProgressAsync()

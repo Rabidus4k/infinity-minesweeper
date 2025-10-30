@@ -1,16 +1,18 @@
 using UnityEngine;
+using Zenject;
 
-public class UIMusicButton : MonoBehaviour
+public class UIMusicButton : UICustomButton
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private ISoundViewModel _viewModel;
+
+    [Inject]
+    private void Construct(ISoundViewModel viewModel)
     {
-        
+        _viewModel = viewModel;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void HandleClick()
     {
-        
+        _viewModel.ToggleMusic();
     }
 }

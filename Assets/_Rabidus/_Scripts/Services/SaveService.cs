@@ -5,6 +5,7 @@ public class SaveService : ISaveService
     private readonly IGameModel _game;
     private readonly ICoordsModel _coords;
     private readonly IAppearenceModel _appearence;
+    private readonly ISoundModel _sound;
 
     public SaveService
     (
@@ -12,7 +13,8 @@ public class SaveService : ISaveService
         IScoreModel score,
         IGameModel game,
         ICoordsModel coords,
-        IAppearenceModel appearence
+        IAppearenceModel appearence,
+        ISoundModel sound
     )
     {
         _currency = currency;
@@ -20,6 +22,7 @@ public class SaveService : ISaveService
         _game = game;
         _coords = coords;
         _appearence = appearence;
+        _sound = sound;
 
         Load();
     }
@@ -49,6 +52,11 @@ public class SaveService : ISaveService
         SaveSystem.Save(_appearence);
     }
 
+    public void SaveSound()
+    {
+        SaveSystem.Save(_sound);
+    }
+
     public void Load()
     {
         SaveSystem.TryLoad(_currency);
@@ -56,6 +64,7 @@ public class SaveService : ISaveService
         SaveSystem.TryLoad(_game);
         SaveSystem.TryLoad(_coords);
         SaveSystem.TryLoad(_appearence);
+        SaveSystem.TryLoad(_sound);
     }
 
     public void ResetSaves()
@@ -71,7 +80,7 @@ public interface ISaveService
     void SaveGame();
     void SaveCoords();
     void SaveAppearence();
-
+    void SaveSound();
     void Load();
     void ResetSaves();
 }

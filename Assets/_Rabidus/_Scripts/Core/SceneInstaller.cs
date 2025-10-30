@@ -49,6 +49,7 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<ICurrencyViewModel>().To<CurrencyViewModel>().AsSingle();
         Container.Bind<ICoordsViewModel>().To<CoordsViewModel>().AsSingle();
         Container.Bind<IAppearenceViewModel>().To<AppearenceViewModel>().AsSingle();
+        Container.Bind<ISoundViewModel>().To<SoundViewModel>().AsSingle();
     }
 
     private void BindModels()
@@ -59,6 +60,7 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<ICurrencyModel>().To<CurrencyModel>().AsSingle();
         Container.Bind<ICoordsModel>().To<CoordsModel>().AsSingle();
         Container.Bind<IAppearenceModel>().To<AppearenceModel>().AsSingle();
+        Container.Bind<ISoundModel>().To<SoundModel>().AsSingle();
     }
 
     private void BindConfigs()

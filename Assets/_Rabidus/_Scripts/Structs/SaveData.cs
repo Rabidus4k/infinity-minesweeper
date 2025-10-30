@@ -84,6 +84,22 @@ public class AppearenceSaveData
 }
 
 [Serializable]
+public class SoundSaveData 
+{
+    public bool Sound;
+    public bool Music;
+
+    public SoundSaveData() { }
+
+    public SoundSaveData(ISoundModel model)
+    {
+        Sound = model.Sound;
+        Music = model.Music;
+    }
+}
+
+
+[Serializable]
 public class CellEntry
 {
     public Vector3Int Key;

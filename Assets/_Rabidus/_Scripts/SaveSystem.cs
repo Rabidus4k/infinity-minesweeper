@@ -8,6 +8,7 @@ public static class SaveSystem
     private static string SaveKeyGame = "SaveKeyGame";
     private static string SaveKeyCoords = "SaveKeyCoords";
     private static string SaveKeyAppearence = "SaveKeyAppearence";
+    private static string SaveKeySound = "SaveKeySound";
 
     public static void Save(ICurrencyModel model)
     {
@@ -42,6 +43,13 @@ public static class SaveSystem
         AppearenceSaveData data = new AppearenceSaveData(model);
         MirraSDK.Data.SetObject<AppearenceSaveData>(SaveKeyAppearence, data, important: true);
         Debug.Log($"[SaveSystem] Save: IAppearenceModel");
+    }
+
+    public static void Save(ISoundModel model)
+    {
+        SoundSaveData data = new SoundSaveData(model);
+        MirraSDK.Data.SetObject<SoundSaveData>(SaveKeySound, data, important: true);
+        Debug.Log($"[SaveSystem] Save: ISoundModel");
     }
 
     public static bool TryLoad(ICurrencyModel model)
@@ -125,6 +133,23 @@ public static class SaveSystem
         }
 
         Debug.Log($"[SaveSystem] Loaded: IAppearenceModel");
+
+        return true;
+    }
+
+    public static bool TryLoad(ISoundModel model)
+    {
+        if (!MirraSDK.Data.HasKey(SaveKeySound)) return false;
+
+        SoundSaveData data = MirraSDK.Data.GetObject<SoundSaveData>(SaveKeySound);
+        Debug.Log(JsonUtility.ToJson(data, prettyPrint: true));
+
+        if (data != null)
+        {
+            model.LoadData(data);
+        }
+
+        Debug.Log($"[SaveSystem] Loaded: ISoundModel");
 
         return true;
     }
