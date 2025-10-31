@@ -26,11 +26,9 @@ public class GameGridDrawerView : MonoBehaviour
 
     private UINotificationManager _notificationManager;
     private SoundManager _soundManager;
-    private ISaveService _saveService;
 
     private bool _canPlaceTile = true;
     
-
     [Inject]
     private void Construct
         (
@@ -39,11 +37,9 @@ public class GameGridDrawerView : MonoBehaviour
             IScoreViewModel scoreViewModel,
             UINotificationManager uINotificationManager,
             GridView.Factory factory,
-            ISaveService saveService,
             SoundManager soundManager
         )
     {
-        _saveService = saveService;
         _soundManager = soundManager;
         _notificationManager = uINotificationManager;
 
@@ -60,7 +56,8 @@ public class GameGridDrawerView : MonoBehaviour
 
         Debug.Log($"Seed: {Random.state}");
 
-        _saveService.IsLoaded.OnChanged += (bool value) => PrepareGameField(_cts.Token).Forget();
+        _gameViewModel.IsLoaded.OnChanged += PrepareGameField;
+        PrepareGameField(_gameViewModel.IsLoaded.Value);
     }
 
     private CancellationTokenSource _cts;
@@ -75,7 +72,7 @@ public class GameGridDrawerView : MonoBehaviour
         _inputViewModel.LMBCoords.OnChanged -= HandleLeftClick;
         _inputViewModel.RMBCoords.OnChanged -= HandleRightClick;
 
-        _saveService.IsLoaded.OnChanged -= (bool value) => PrepareGameField(_cts.Token).Forget();
+        _gameViewModel.IsLoaded.OnChanged -= PrepareGameField;
 
         CancelAndDispose();
     }
@@ -95,10 +92,14 @@ public class GameGridDrawerView : MonoBehaviour
         }
     }
 
+    private void PrepareGameField(bool value)
+    {
+        if (!value) return;
+        PrepareGameField(_cts.Token).Forget();
+    }
+
     private async UniTask PrepareGameField(CancellationToken token)
     {
-        _loadingPanel.ShowPanel();
-
         _canPlaceTile = false;
         await DrawChunkAsync(Vector3Int.zero, _gameViewModel.Cells.Value, token);
         await HandleClickAsync(_gameViewModel.Config.Value.OriginCell, token);

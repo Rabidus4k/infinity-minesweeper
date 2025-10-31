@@ -1,5 +1,6 @@
 public class ScoreViewModel : IScoreViewModel
 {
+    public ReactiveProperty<bool> IsLoaded { get; private set; } = new ReactiveProperty<bool>();
     public ReactiveProperty<int> Score {get; private set;} = new ReactiveProperty<int>();
     public ReactiveProperty<int> MaxScore { get; private set;} = new ReactiveProperty<int>();
 
@@ -26,9 +27,15 @@ public class ScoreViewModel : IScoreViewModel
             MaxScore.Value = _model.MaxScore;
         }
     }
+
+    public void LoadData(object data)
+    {
+        _model.LoadData(data);
+        IsLoaded.Value = _model.IsLoaded;
+    }
 }
 
-public interface IScoreViewModel 
+public interface IScoreViewModel : ILoadableViewModel
 {
     public ReactiveProperty<int> Score { get; }
     public ReactiveProperty<int> MaxScore { get; }

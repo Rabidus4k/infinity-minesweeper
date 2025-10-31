@@ -1,13 +1,13 @@
 public class AppearenceViewModel : IAppearenceViewModel
 {
+    public ReactiveProperty<bool> IsLoaded { get; private set; } = new ReactiveProperty<bool>();
+
     public ReactiveProperty<ThemeConfig> ThemeConfig { get; private set; } = new ReactiveProperty<ThemeConfig>();
 
     private IAppearenceModel _model;
-    private ISaveService _saveService;
-
-    public AppearenceViewModel(IAppearenceModel model, ISaveService saveService)
+    
+    public AppearenceViewModel(IAppearenceModel model)
     {
-        _saveService = saveService;
         _model = model;
 
         ThemeConfig.Value = _model.ThemeConfig;
@@ -17,12 +17,16 @@ public class AppearenceViewModel : IAppearenceViewModel
     {
         _model.ChangeTheme(theme);
         ThemeConfig.Value = theme;
+    }
 
-        //_saveService.SaveAppearence();
+    public void LoadData(object data)
+    {
+        _model.LoadData(data);
+        IsLoaded.Value = _model.IsLoaded;
     }
 }
 
-public interface IAppearenceViewModel
+public interface IAppearenceViewModel : ILoadableViewModel
 {
     public ReactiveProperty<ThemeConfig> ThemeConfig { get; }
     public void ChangeTheme(ThemeConfig theme);

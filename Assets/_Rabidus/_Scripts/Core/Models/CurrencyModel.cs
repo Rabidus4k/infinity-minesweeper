@@ -1,5 +1,6 @@
 public class CurrencyModel : ICurrencyModel
 {
+    public bool IsLoaded { get; private set; }
     public int Gems {get; private set;}
 
     public void AddGems(int value)
@@ -9,7 +10,10 @@ public class CurrencyModel : ICurrencyModel
 
     public void LoadData(object data)
     {
-        Gems = ((CurrencySaveData)data).Gems;
+        if (data != null)
+            Gems = ((CurrencySaveData)data).Gems;
+
+        IsLoaded = true;
     }
 
     public void SpendGems(int value)
@@ -28,7 +32,7 @@ public class CurrencyModel : ICurrencyModel
     }
 }
 
-public interface ICurrencyModel : ILoadable
+public interface ICurrencyModel : ILoadableModel
 {
     public int Gems { get; }
 

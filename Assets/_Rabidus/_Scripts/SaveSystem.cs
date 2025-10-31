@@ -14,58 +14,58 @@ public static class SaveSystem
     private static string SaveKeyAppearence = "SaveKeyAppearence";
     private static string SaveKeySound = "SaveKeySound";
 
-    public static void Save(ICurrencyModel model)
+    public static async UniTask Save(ICurrencyModel model)
     {
         CurrencySaveData data = new CurrencySaveData(model);
         //MirraSDK.Data.SetObject<CurrencySaveData>(SaveKeyCurrency, data, important: true);
         Debug.Log($"[SaveSystem] Save: ICurrencyModel");
 
-        SaveObjectDataAsync(SaveKeyCurrency, data).Forget();
+        await SaveObjectDataAsync(SaveKeyCurrency, data);
     }
 
-    public static void Save(IScoreModel model)
+    public static async UniTask Save(IScoreModel model)
     {
         ScoreSaveData data = new ScoreSaveData(model);
         //MirraSDK.Data.SetObject<ScoreSaveData>(SaveKeyScore, data, important: true);
         Debug.Log($"[SaveSystem] Save: IScoreModel");
 
-        SaveObjectDataAsync(SaveKeyScore, data).Forget();
+        await SaveObjectDataAsync(SaveKeyScore, data);
     }
 
-    public static void Save(IGameModel model)
+    public static async UniTask Save(IGameModel model)
     {
         GameSaveData data = new GameSaveData(model);
         //MirraSDK.Data.SetObject<GameSaveData>(SaveKeyGame, data, important: true);
         Debug.Log($"[SaveSystem] Save: IGameModel");
 
-        SaveObjectDataAsync(SaveKeyGame, data).Forget();
+        await SaveObjectDataAsync(SaveKeyGame, data);
     }
 
-    public static void Save(ICoordsModel model)
+    public static async UniTask Save(ICoordsModel model)
     {
         CoordsSaveData data = new CoordsSaveData(model);
         //MirraSDK.Data.SetObject<CoordsSaveData>(SaveKeyCoords, data, important: true);
         Debug.Log($"[SaveSystem] Save: ICoordsModel");
 
-        SaveObjectDataAsync(SaveKeyCoords, data).Forget();
+        await SaveObjectDataAsync(SaveKeyCoords, data);
     }
 
-    public static void Save(IAppearenceModel model)
+    public static async UniTask Save(IAppearenceModel model)
     {
         AppearenceSaveData data = new AppearenceSaveData(model);
         //MirraSDK.Data.SetObject<AppearenceSaveData>(SaveKeyAppearence, data, important: true);
         Debug.Log($"[SaveSystem] Save: IAppearenceModel");
 
-        SaveObjectDataAsync(SaveKeyAppearence, data).Forget();
+        await SaveObjectDataAsync(SaveKeyAppearence, data);
     }
 
-    public static void Save(ISoundModel model)
+    public static async UniTask Save(ISoundModel model)
     {
         SoundSaveData data = new SoundSaveData(model);
         //MirraSDK.Data.SetObject<SoundSaveData>(SaveKeySound, data, important: true);
         Debug.Log($"[SaveSystem] Save: ISoundModel");
 
-        SaveObjectDataAsync(SaveKeySound, data).Forget();
+        await SaveObjectDataAsync(SaveKeySound, data);
     }
 
     private static async UniTask SaveObjectDataAsync(string key, object data)
@@ -98,102 +98,54 @@ public static class SaveSystem
 
     }
 
-    public static async UniTask TryLoad(ICurrencyModel model)
+    public static async UniTask TryLoad(ICurrencyViewModel model)
     {
-        //if (!MirraSDK.Data.HasKey(SaveKeyCurrency)) return;
-
-        //CurrencySaveData data = MirraSDK.Data.GetObject<CurrencySaveData>(SaveKeyCurrency);
-        //Debug.Log(JsonUtility.ToJson(data, prettyPrint: true));
-
         CurrencySaveData data = await RetrieveSpecificData<CurrencySaveData>(SaveKeyCurrency);
-        if (data != null)
-        {
-            model.LoadData(data);
-        }
+        model.LoadData(data);
 
         Debug.Log($"[SaveSystem] Loaded: ICurrencyModel");
     }
 
-    public static async UniTask TryLoad(IScoreModel model)
+    public static async UniTask TryLoad(IScoreViewModel model)
     {
-        //if (!MirraSDK.Data.HasKey(SaveKeyScore)) return;
-
-        //ScoreSaveData data = MirraSDK.Data.GetObject<ScoreSaveData>(SaveKeyScore);
-        //Debug.Log(JsonUtility.ToJson(data, prettyPrint: true));
-
         ScoreSaveData data = await RetrieveSpecificData<ScoreSaveData>(SaveKeyScore);
-        if (data != null)
-        {
-            model.LoadData(data);
-        }
+        model.LoadData(data);
 
         Debug.Log($"[SaveSystem] Loaded: IScoreModel");
     }
 
-    public static async UniTask TryLoad(IGameModel model)
+    public static async UniTask TryLoad(IGameViewModel model)
     {
-        //if (!MirraSDK.Data.HasKey(SaveKeyGame)) return;
-
-        //GameSaveData data = MirraSDK.Data.GetObject<GameSaveData>(SaveKeyGame);
-        //Debug.Log(JsonUtility.ToJson(data, prettyPrint: true));
-
         GameSaveData data = await RetrieveSpecificData<GameSaveData>(SaveKeyGame);
-        if (data != null)
-        {
-            model.LoadData(data);
-        }
+        model.LoadData(data);
 
         Debug.Log($"[SaveSystem] Loaded: IGameModel");
     }
 
-    public static async UniTask TryLoad(ICoordsModel model)
+    public static async UniTask TryLoad(ICoordsViewModel model)
     {
-        //if (!MirraSDK.Data.HasKey(SaveKeyCoords)) return;
-
-        //CoordsSaveData data = MirraSDK.Data.GetObject<CoordsSaveData>(SaveKeyCoords);
-        //Debug.Log(JsonUtility.ToJson(data, prettyPrint: true));
-
         CoordsSaveData data = await RetrieveSpecificData<CoordsSaveData>(SaveKeyCoords);
-        if (data != null)
-        {
-            model.LoadData(data);
-        }
+        model.LoadData(data);
 
         Debug.Log($"[SaveSystem] Loaded: ICoordsModel");
 
         return;
     }
 
-    public static async UniTask TryLoad(IAppearenceModel model)
+    public static async UniTask TryLoad(IAppearenceViewModel model)
     {
-        //if (!MirraSDK.Data.HasKey(SaveKeyAppearence)) return;
-
-        //AppearenceSaveData data = MirraSDK.Data.GetObject<AppearenceSaveData>(SaveKeyAppearence);
-        //Debug.Log(JsonUtility.ToJson(data, prettyPrint: true));
-
         AppearenceSaveData data = await RetrieveSpecificData<AppearenceSaveData>(SaveKeyAppearence);
-        if (data != null)
-        {
-            model.LoadData(data);
-        }
+        model.LoadData(data);
 
         Debug.Log($"[SaveSystem] Loaded: IAppearenceModel");
 
         return;
     }
 
-    public static async UniTask TryLoad(ISoundModel model)
+    public static async UniTask TryLoad(ISoundViewModel model)
     {
-        //if (!MirraSDK.Data.HasKey(SaveKeySound)) return;
-
-        //SoundSaveData data = MirraSDK.Data.GetObject<SoundSaveData>(SaveKeySound);
-        //Debug.Log(JsonUtility.ToJson(data, prettyPrint: true));
-
         SoundSaveData data = await RetrieveSpecificData<SoundSaveData>(SaveKeySound);
-        if (data != null)
-        {
-            model.LoadData(data);
-        }
+        model.LoadData(data);
 
         Debug.Log($"[SaveSystem] Loaded: ISoundModel");
 
@@ -235,8 +187,6 @@ public static class SaveSystem
 
     public static async UniTask ResetSaves()
     {
-        //MirraSDK.Data.DeleteAll();
-
         await ForceDeleteSpecificData(SaveKeyCurrency);
         await ForceDeleteSpecificData(SaveKeyScore);
         await ForceDeleteSpecificData(SaveKeyGame);

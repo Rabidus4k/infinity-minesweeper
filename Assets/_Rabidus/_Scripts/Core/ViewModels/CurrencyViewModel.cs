@@ -1,5 +1,6 @@
 public class CurrencyViewModel : ICurrencyViewModel
 {
+    public ReactiveProperty<bool> IsLoaded { get; private set; } = new ReactiveProperty<bool>();
     public ReactiveProperty<int> Gems { get; protected set; } = new ReactiveProperty<int>();
 
     protected ICurrencyModel _model;
@@ -25,9 +26,15 @@ public class CurrencyViewModel : ICurrencyViewModel
             Gems.Value = _model.Gems;
         }
     }
+
+    public void LoadData(object data)
+    {
+        _model.LoadData(data);
+        IsLoaded.Value = _model.IsLoaded;
+    }
 }
 
-public interface ICurrencyViewModel 
+public interface ICurrencyViewModel : ILoadableViewModel
 {
     public ReactiveProperty<int> Gems { get; }
     void AddGems(int value);

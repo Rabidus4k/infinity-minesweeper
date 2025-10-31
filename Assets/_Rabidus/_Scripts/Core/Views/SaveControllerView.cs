@@ -1,11 +1,37 @@
 ﻿using Cysharp.Threading.Tasks;
-using MirraGames.SDK;
+using System.Threading;
 using UnityEngine;
 using Zenject;
 
 public class SaveControllerView : MonoBehaviour
 {
     [SerializeField] private float _saveInterval = 5f;
+    private CancellationTokenSource _cts;
+
+    private void OnEnable()
+    {
+        _cts = new CancellationTokenSource();
+    }
+
+    private void OnDisable()
+    {
+        CancelAndDispose();
+    }
+
+    private void OnDestroy()
+    {
+        CancelAndDispose();
+    }
+
+    private void CancelAndDispose()
+    {
+        if (_cts != null)
+        {
+            _cts.Cancel();
+            _cts.Dispose();
+            _cts = null;
+        }
+    }
 
     private ISaveService _saveService;
 
@@ -18,48 +44,19 @@ public class SaveControllerView : MonoBehaviour
     private async void Start()
     {
         await _saveService.Load();
-        SaveProgressAsync().Forget();
+        SaveProgressAsync(_cts.Token).Forget();
     }
 
-    //private void OnEnable()
-    //{
-    //    Application.focusChanged += OnFocusChanged;
-    //    Application.quitting += OnAppQuit;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    Application.focusChanged -= OnFocusChanged;
-    //    Application.quitting -= OnAppQuit;
-    //}
-
-    private void OnFocusChanged(bool hasFocus)
-    {
-        if (!hasFocus)
-        {
-            SaveProgress();
-        }
-    }
-
-    private void OnAppQuit()
-    {
-        SaveProgress();
-    }
-
-    public void SaveProgress()
-    {
-        _saveService.SaveCurrency();
-        _saveService.SaveScore();
-        _saveService.SaveGame();
-        _saveService.SaveCoords();
-    }
-
-    private async UniTask SaveProgressAsync()
+    private async UniTask SaveProgressAsync(CancellationToken token)
     {
         while (true)
         {
-            await UniTask.WaitForSeconds(_saveInterval);
-            SaveProgress();
+            await _saveService.SaveCurrency();
+            await _saveService.SaveScore();
+            await _saveService.SaveGame();
+            await _saveService.SaveCoords();
+            await _saveService.SaveScore();
+            await UniTask.WaitForSeconds(_saveInterval, cancellationToken: token);
         }
     }
 

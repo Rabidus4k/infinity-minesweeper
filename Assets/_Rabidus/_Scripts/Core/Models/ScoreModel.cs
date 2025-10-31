@@ -1,5 +1,6 @@
 public class ScoreModel : IScoreModel
 {
+    public bool IsLoaded { get; private set; }
     public int Score { get; private set; }
     public int MaxScore { get; private set; }
 
@@ -10,7 +11,9 @@ public class ScoreModel : IScoreModel
 
     public void LoadData(object data)
     {
-        MaxScore = ((ScoreSaveData)data).MaxScore;
+        if (data != null)
+            MaxScore = ((ScoreSaveData)data).MaxScore;
+        IsLoaded = true;
     }
 
     public void SetMaxScore(int maxScore)
@@ -19,7 +22,7 @@ public class ScoreModel : IScoreModel
     }
 }
 
-public interface IScoreModel: ILoadable
+public interface IScoreModel: ILoadableModel
 {
     public int Score { get; }
     public int MaxScore { get; }

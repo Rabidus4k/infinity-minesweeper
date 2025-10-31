@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class GameModel : IGameModel
 {
+    public bool IsLoaded { get; private set; }
     public IGameConfig Config { get; private set; }
     public Dictionary<Vector3Int, CellInfo> Cells { get; private set; } = new Dictionary<Vector3Int, CellInfo>();
+
 
     public GameModel(IGameConfig config)
     {
@@ -18,18 +20,23 @@ public class GameModel : IGameModel
 
     public void LoadData(object data)
     {
-        var loadedCells = ((GameSaveData)data).Cells;
-
-        foreach (var item in loadedCells)
+        if (data != null)
         {
-            if (Cells.ContainsKey(item.Key)) continue;
+            var loadedCells = ((GameSaveData)data).Cells;
 
-            Cells.Add(item.Key, item.Value);
+            foreach (var item in loadedCells)
+            {
+                if (Cells.ContainsKey(item.Key)) continue;
+
+                Cells.Add(item.Key, item.Value);
+            }
         }
+
+        IsLoaded = true;
     }
 }
 
-public interface IGameModel : ILoadable
+public interface IGameModel : ILoadableModel
 {
     public IGameConfig Config { get; }
     public Dictionary<Vector3Int, CellInfo> Cells { get; }

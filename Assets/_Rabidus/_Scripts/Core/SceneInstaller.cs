@@ -20,9 +20,10 @@ public class SceneInstaller : MonoInstaller
         BindConfigs();
         
         BindModels();
+        BindViewModels();
+
         BindServices();
 
-        BindViewModels();
         BindFactories();
 
         Container.Bind<UINotificationManager>().FromInstance(_notificationManager).AsSingle();

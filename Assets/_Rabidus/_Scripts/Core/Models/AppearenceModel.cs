@@ -1,7 +1,6 @@
-using UnityEngine;
-
 public class AppearenceModel : IAppearenceModel
 {
+    public bool IsLoaded { get; private set; }
     public ThemeConfig ThemeConfig { get; private set; }
 
     public AppearenceModel(ThemeConfig defaultThemeConfig)
@@ -16,11 +15,14 @@ public class AppearenceModel : IAppearenceModel
 
     public void LoadData(object data)
     {
-        ThemeConfig = ((AppearenceSaveData)data).ThemeConfig;
+        if (data != null)
+            ThemeConfig = ((AppearenceSaveData)data).ThemeConfig;
+
+        IsLoaded = true;
     }
 }
 
-public interface IAppearenceModel : ILoadable
+public interface IAppearenceModel : ILoadableModel
 {
     public ThemeConfig ThemeConfig { get; }
     public void ChangeTheme(ThemeConfig theme);
