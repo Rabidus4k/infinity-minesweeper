@@ -15,8 +15,6 @@ public class GridView : MonoBehaviour
     private int _value = 0;
     private int _maxValue = 0;
 
-    private Dictionary<Vector3Int, CellInfo> _addedCells = new Dictionary<Vector3Int, CellInfo>();
-
     private UIPanel _currentPanel;
 
     protected IGameViewModel _gameViewModel;
@@ -34,55 +32,15 @@ public class GridView : MonoBehaviour
         _maxValue = maxValue;
     }
 
-    public void RefreshCell(Vector3Int coords)
-    {
-        if (!_gameViewModel.Cells.Value.ContainsKey(coords)) return;
-
-        var cell = _gameViewModel.Cells.Value[coords];
-
-        if (cell.IsOpened)
-        {
-            if (_addedCells.ContainsKey(coords)) return;
-            _addedCells.Add(coords, cell);
-
-            if (cell.Value == -1 && cell.Ignore == false)
-                SetState(GridStates.Death);
-
-            AddValue(1);
-        }
-        else
-        {
-            if (cell.IsFlagged && cell.Value == -1)
-            {
-                if (_addedCells.ContainsKey(coords)) return;
-                _addedCells.Add(coords, cell);
-
-                AddValue(1);
-            }
-            else if (!cell.IsFlagged)
-            {
-                if (_addedCells.ContainsKey(coords))
-                {
-                    _addedCells.Remove(coords);
-                    AddValue(-1);
-                }
-            }
-        }
-
-
-        if (_value == _maxValue && CurrentState == GridStates.None)
-        {
-            if (cell.Ignore == false)
-                SetState(GridStates.Reward);
-            else
-                SetState(GridStates.Opened);
-        }
-    }
-
     public void AddValue(int ammount)
     {
         _value += ammount;
         _valueText.SetText(_value.ToString());
+
+        if (_value == _maxValue && CurrentState == GridStates.None)
+        {
+            SetState(GridStates.Reward);
+        }
     }
 
     public void Reviwe()
@@ -113,39 +71,12 @@ public class GridView : MonoBehaviour
                 }
             case GridStates.Reviwe:
                 {
-                    foreach (var cell in _addedCells)
-                    {
-                        if (cell.Value.IsOpened && cell.Value.Value == -1)
-                        {
-                            var cellInfo = new CellInfo()
-                            {
-                                Value = cell.Value.Value,
-                                IsFlagged = cell.Value.IsFlagged,
-                                IsOpened = cell.Value.IsOpened,
-                                Ignore = true
-                            };
-
-                            _gameViewModel.Cells.Value[cell.Key] = cellInfo;
-                        }
-                    }
                     SetState(GridStates.None);
                     break;
                 }
             case GridStates.Reward:
                 {
                     _soundManager.PlaySound("GridVictory");
-                    foreach (var cell in _addedCells)
-                    {
-                        var cellInfo  = new CellInfo()
-                        {
-                            Value = cell.Value.Value,
-                            IsFlagged = cell.Value.IsFlagged,
-                            IsOpened = cell.Value.IsOpened,
-                            Ignore = true
-                        };
-
-                        _gameViewModel.Cells.Value[cell.Key] = cellInfo;
-                    }
                     break;
                 }
             case GridStates.Death:

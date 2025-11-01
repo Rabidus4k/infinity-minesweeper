@@ -17,15 +17,6 @@ public class UIRestartButton : UICustomButton
 
     protected override void HandleClick()
     {
-        RestartGameAsync().Forget();
-    }
-
-    private async UniTask RestartGameAsync()
-    {
-        _gameViewModel.Cells.Value.Clear();
-
-        await _saveService.SaveGame();
-
         SceneManager.LoadScene("GameScene");
     }
 }

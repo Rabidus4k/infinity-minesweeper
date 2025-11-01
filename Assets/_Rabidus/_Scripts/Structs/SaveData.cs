@@ -53,20 +53,13 @@ public class CoordsSaveData
 [Serializable]
 public class GameSaveData
 {
-    public List<CellEntry> Cells = new List<CellEntry>();
+    public List<Vector3Int> OpenedCells = new List<Vector3Int>();
 
     public GameSaveData() { }
 
     public GameSaveData(IGameModel model)
     {
-        foreach (var kvp in model.Cells)
-        {
-            Cells.Add(new CellEntry
-            {
-                Key = kvp.Key,
-                Value = kvp.Value
-            });
-        }
+        OpenedCells = model.OpenedCells;
     }
 }
 

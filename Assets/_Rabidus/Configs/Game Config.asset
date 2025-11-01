@@ -12,6 +12,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7736263f84f573e4cb431b159bc2a1d3, type: 3}
   m_Name: Game Config
   m_EditorClassIdentifier: Assembly-CSharp::GameConfig
+  <Sprites>k__BackingField:
+    serializedKvps:
+    - Key: -2
+      Value: {fileID: 3150387745278999259, guid: 135d7455b71ad824a922efd50e8532c8, type: 3}
+      index: 0
+      isKeyRepeated: 0
+    - Key: -1
+      Value: {fileID: 9093825842685103111, guid: 135d7455b71ad824a922efd50e8532c8, type: 3}
+      index: 1
+      isKeyRepeated: 0
+    - Key: 0
+      Value: {fileID: -2850093654693141264, guid: 135d7455b71ad824a922efd50e8532c8, type: 3}
+      index: 2
+      isKeyRepeated: 0
+    - Key: 1
+      Value: {fileID: -983156657889264743, guid: 135d7455b71ad824a922efd50e8532c8, type: 3}
+      index: 3
+      isKeyRepeated: 0
+    - Key: 2
+      Value: {fileID: 4335250483284255847, guid: 135d7455b71ad824a922efd50e8532c8, type: 3}
+      index: 4
+      isKeyRepeated: 0
+    - Key: 3
+      Value: {fileID: -217455086581007235, guid: 135d7455b71ad824a922efd50e8532c8, type: 3}
+      index: 5
+      isKeyRepeated: 0
+    - Key: 4
+      Value: {fileID: -199644854353079308, guid: 135d7455b71ad824a922efd50e8532c8, type: 3}
+      index: 6
+      isKeyRepeated: 0
+    - Key: 5
+      Value: {fileID: -997972493423046422, guid: 135d7455b71ad824a922efd50e8532c8, type: 3}
+      index: 7
+      isKeyRepeated: 0
+    - Key: 6
+      Value: {fileID: -7690861461720601230, guid: 135d7455b71ad824a922efd50e8532c8, type: 3}
+      index: 8
+      isKeyRepeated: 0
+    - Key: 7
+      Value: {fileID: -6596105612730252187, guid: 135d7455b71ad824a922efd50e8532c8, type: 3}
+      index: 9
+      isKeyRepeated: 0
+    - Key: 8
+      Value: {fileID: 3210994475073176143, guid: 135d7455b71ad824a922efd50e8532c8, type: 3}
+      index: 10
+      isKeyRepeated: 0
+    dividerPos: 0.33
   <OriginCell>k__BackingField: {x: 3, y: 3, z: 0}
   <StartCells>k__BackingField:
     serializedKvps:
@@ -49,5 +96,5 @@ MonoBehaviour:
       isKeyRepeated: 0
     dividerPos: 0.33
   <Size>k__BackingField: 8
-  <Seed>k__BackingField: 0
-  <MinesPerChunk>k__BackingField: 23
+  <Seed>k__BackingField: 123
+  <MinesPerChunk>k__BackingField: 15

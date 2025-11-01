@@ -5,8 +5,7 @@ public class GameViewModel : IGameViewModel
 {
     public ReactiveProperty<bool> IsLoaded { get; private set; } = new ReactiveProperty<bool>();
     public ReactiveProperty<IGameConfig> Config { get; private set; } = new ReactiveProperty<IGameConfig>();
-
-    public ReactiveProperty<Dictionary<Vector3Int, CellInfo>> Cells { get; private set; } = new ReactiveProperty<Dictionary<Vector3Int, CellInfo>>();
+    public ReactiveProperty<List<Vector3Int>> OpenedCells { get; private set; } = new ReactiveProperty<List<Vector3Int>>();
 
 
     protected IGameModel _model;
@@ -15,7 +14,7 @@ public class GameViewModel : IGameViewModel
     {
         _model = model;
 
-        Cells.Value = _model.Cells;
+        OpenedCells.Value = _model.OpenedCells;
         Config.Value = _model.Config;
     }
 
@@ -29,5 +28,5 @@ public class GameViewModel : IGameViewModel
 public interface IGameViewModel : ILoadableViewModel
 {
     public ReactiveProperty<IGameConfig> Config { get; }
-    public ReactiveProperty<Dictionary<Vector3Int, CellInfo>> Cells { get; }
+    public ReactiveProperty<List<Vector3Int>> OpenedCells { get; }
 }

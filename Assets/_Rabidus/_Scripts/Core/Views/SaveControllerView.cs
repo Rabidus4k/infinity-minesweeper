@@ -1,38 +1,11 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class SaveControllerView : MonoBehaviour
 {
-    [SerializeField] private float _saveInterval = 5f;
-    private CancellationTokenSource _cts;
-
-    private void OnEnable()
-    {
-        _cts = new CancellationTokenSource();
-    }
-
-    private void OnDisable()
-    {
-        CancelAndDispose();
-    }
-
-    private void OnDestroy()
-    {
-        CancelAndDispose();
-    }
-
-    private void CancelAndDispose()
-    {
-        if (_cts != null)
-        {
-            _cts.Cancel();
-            _cts.Dispose();
-            _cts = null;
-        }
-    }
-
     private ISaveService _saveService;
 
     [Inject]
@@ -41,27 +14,18 @@ public class SaveControllerView : MonoBehaviour
         _saveService = saveService;
     }
 
-    private async void Start()
+    public void SaveProgress()
     {
-        await _saveService.Load();
-        SaveProgressAsync(_cts.Token).Forget();
-    }
-
-    private async UniTask SaveProgressAsync(CancellationToken token)
-    {
-        while (true)
-        {
-            await _saveService.SaveCurrency();
-            await _saveService.SaveScore();
-            await _saveService.SaveGame();
-            await _saveService.SaveCoords();
-            await _saveService.SaveScore();
-            await UniTask.WaitForSeconds(_saveInterval, cancellationToken: token);
-        }
+        _saveService.SaveCurrency();
+        _saveService.SaveScore();
+        _saveService.SaveGame();
+        _saveService.SaveCoords();
+        _saveService.SaveScore();
     }
 
     public void ResetProgress()
     {
         _saveService.ResetSaves();
+        SceneManager.LoadScene("GameScene");
     }
 }

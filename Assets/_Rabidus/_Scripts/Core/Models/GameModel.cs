@@ -5,8 +5,7 @@ public class GameModel : IGameModel
 {
     public bool IsLoaded { get; private set; }
     public IGameConfig Config { get; private set; }
-    public Dictionary<Vector3Int, CellInfo> Cells { get; private set; } = new Dictionary<Vector3Int, CellInfo>();
-
+    public List<Vector3Int> OpenedCells { get; private set; } = new List<Vector3Int>();
 
     public GameModel(IGameConfig config)
     {
@@ -14,7 +13,7 @@ public class GameModel : IGameModel
 
         foreach (var item in Config.StartCells)
         {
-            Cells.Add(item.Key, item.Value);
+            OpenedCells.Add(item.Key);
         }
     }
 
@@ -22,13 +21,13 @@ public class GameModel : IGameModel
     {
         if (data != null)
         {
-            var loadedCells = ((GameSaveData)data).Cells;
+            var loadedCells = ((GameSaveData)data).OpenedCells;
 
             foreach (var item in loadedCells)
             {
-                if (Cells.ContainsKey(item.Key)) continue;
+                if (OpenedCells.Contains(item)) continue;
 
-                Cells.Add(item.Key, item.Value);
+                OpenedCells.Add(item);
             }
         }
 
@@ -39,6 +38,6 @@ public class GameModel : IGameModel
 public interface IGameModel : ILoadableModel
 {
     public IGameConfig Config { get; }
-    public Dictionary<Vector3Int, CellInfo> Cells { get; }
+    public List<Vector3Int> OpenedCells { get; }
 }
 

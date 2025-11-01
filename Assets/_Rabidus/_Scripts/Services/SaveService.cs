@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using MirraGames.SDK;
 
 public class SaveService : ISaveService
 {
@@ -46,6 +47,8 @@ public class SaveService : ISaveService
         _coordsModel = coordsModel;
         _appearenceModel = appearenceModel;
         _soundModel = soundModel;
+
+        Load();
     }
 
     public async UniTask SaveCurrency()
@@ -80,6 +83,7 @@ public class SaveService : ISaveService
 
     public async UniTask Load()
     {
+        //MirraSDK.Data.DeleteAll();
         await SaveSystem.TryLoad(_currencyViewModel);
         await SaveSystem.TryLoad(_scoreViewModel);
         await SaveSystem.TryLoad(_gameViewModel);
